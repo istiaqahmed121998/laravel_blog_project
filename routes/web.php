@@ -13,11 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/create', function () {
+    return view('admin.create_post');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\BlogsController::class, 'index'])->name('home');
+Route::get('/blogpost', [App\Http\Controllers\BlogsController::class, 'show'])->name('home');
 Route::get('/adminpanel', [App\Http\Controllers\Admin\adminController::class, 'index'])->name('admin');

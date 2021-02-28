@@ -1,77 +1,58 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+@extends('layouts.auth')
+@section('title', 'Login')
+@section('childcss')
+<link href="{{asset('assets/css/pages/login/login-1.css')}}" rel="stylesheet" type="text/css" />
+@stop
+@section('login')
+    <!--begin::Signup-->
+    <div class="login-form login-signin">
+        <!--begin::Form-->
+        <form class="form" novalidate="novalidate" id="kt_login_signup_form" method="POST" action="{{ route('register') }}">
+            @csrf
+        <!--begin::Title-->
+            <div class="pb-13 pt-lg-0 pt-5">
+                <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg">{{ __('Sign Up') }}</h3>
+                <p class="text-muted font-weight-bold font-size-h4">Enter your details to create your account</p>
             </div>
-        </div>
+            <!--end::Title-->
+            <!--begin::Form group-->
+            <div class="form-group">
+                <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="text" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name">
+            </div>
+            <!--end::Form group-->
+            <!--begin::Form group-->
+            <div class="form-group">
+                <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" PLACEHOLDER="Email Address">
+            </div>
+            <!--end::Form group-->
+            <!--begin::Form group-->
+            <div class="form-group">
+                <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="password" name="password" required autocomplete="new-password" placeholder="Password">
+            </div>
+            <!--end::Form group-->
+            <!--begin::Form group-->
+            <div class="form-group">
+                <input class="form-control form-control-solid h-auto py-6 px-6 rounded-lg font-size-h6" type="password" name="password_confirmation" required autocomplete="new-password" placeholder="Confirm Password">
+            </div>
+            <!--end::Form group-->
+            <!--begin::Form group-->
+            <div class="form-group">
+                <label class="checkbox mb-0">
+                    <input type="checkbox" name="agree" />
+                    <span></span>
+                    <div class="ml-2">I Agree the
+                        <a href="#">terms and conditions</a>.</div>
+                </label>
+            </div>
+            <!--end::Form group-->
+            <!--begin::Form group-->
+            <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
+                <button type="submit" id="kt_login_signup_submit" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">{{ __('Register') }}</button>
+                <button type="button" id="kt_login_signup_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">Cancel</button>
+            </div>
+            <!--end::Form group-->
+        </form>
+        <!--end::Form-->
     </div>
-</div>
+    <!--end::Signup-->
 @endsection

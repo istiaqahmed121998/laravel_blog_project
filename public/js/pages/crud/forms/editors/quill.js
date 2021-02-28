@@ -2,21 +2,25 @@
 var KTQuilDemos = function() {
 
     // Private functions
-    var demo1 = function() {
+    hljs.configure({   // optionally configure hljs
+        languages: ['javascript', 'ruby', 'python']
+      });
+      var demo1 = function() {
+
         var quill = new Quill('#kt_quil_1', {
             modules: {
-                toolbar: [
-                    [{
-                        header: [1, 2, false]
-                    }],
-                    ['bold', 'italic', 'underline'],
-                    ['image', 'code-block']
-                ]
+                toolbar: true
             },
             placeholder: 'Type your text here...',
-            theme: 'snow' // or 'bubble'
+            theme: 'snow'
         });
+
+        quill.on('text-change', function() {
+            console.log('Text change!'+quill.getText());
+          });
+          
     }
+    
 
     var demo2 = function() {
         var Delta = Quill.import('delta');
