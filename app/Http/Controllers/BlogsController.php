@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Blog;
 
@@ -11,7 +9,10 @@ class BlogsController extends Controller
         $blogs=Blog::all();
         return view('welcome',compact('blogs'));
     }
-    public function show(){
-        return view('post');
+
+    public function show($slug){
+        
+        $blog=Blog::where('slug',$slug)->firstOrFail();
+        return view('post',compact('blog'));
     }
 }

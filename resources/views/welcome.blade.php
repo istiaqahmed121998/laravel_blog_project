@@ -7,10 +7,10 @@
     <div class="row">
         <div class="col-sm-6 col-md-12">
             @foreach($blogs ?? '' as $blog)
-            <div class="post-card -full -center"><a class="card__cover" href="post_standard.html"><img src="assets/images/posts/1.png" alt="Looking for some feedback for this rejected track" /></a>
+            <div class="post-card -full -center"><a class="card__cover" href="{{route('blog.show', $blog->slug) }}"><img src="assets/images/posts/1.png" alt="Looking for some feedback for this rejected track" /></a>
                 <div class="card__content">
                     <h5 class="card__content-category">Technology</h5>
-                    <a class="card__content-title" href="post_standard.html">{{$blog->title}}</a>
+                    <a class="card__content-title" href="{{route('blog.show', $blog->slug) }}">{{$blog->title}}</a>
                     <div class="card__content-info">
                         <div class="info__time info__author"><i class="far fa-user"></i>
                             <p>Jessica Stephens</p>
@@ -22,7 +22,7 @@
                             <p>3</p>
                         </div>
                     </div>
-                    <p class="card__content-description">{{$blog->body}}.</p><a class="more-btn" href="post_standard.html">Read more </a>
+                    <p class="card__content-description">{{$blog->body}}</p><a class="more-btn" href="post_standard.html">Read more </a>
                 </div>
             </div>
             @endforeach

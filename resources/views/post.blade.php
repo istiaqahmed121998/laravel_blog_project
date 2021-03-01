@@ -8,6 +8,35 @@
     <div class="social-media"><a href="#" style="background-color: #075ec8"><i class="fab fa-facebook-f"></i></a><a href="#" style="background-color: #40c4ff"><i class="fab fa-twitter"></i></a><a href="#" style="background-image: linear-gradient(to top, #f2a937, #d92e73, #9937b7, #4a66d3), linear-gradient(to top, #af00e1, #ff9e35)"><i class="fab fa-instagram"></i></a><a href="#" style="background-color: #ff0000"><i class="fab fa-youtube"></i></a></div>
 </div>
 @stop
+@section('details')
+<div class="post-standard__banner">
+    <div class="post-standard__banner__image"><img src="{{asset('assets/images/post_detail/standard/banner.png')}}" alt="Post banner image" /></div>
+    <div class="post-standard__banner__content">
+        <div class="post-card -center">
+            <div></div>
+            <div class="card__content">
+                <h5 class="card__content-category">Typography</h5><a class="card__content-title" href="{{route('blog.show', $blog->slug) }}">{{$blog->title}}</a>
+                <div class="card__content-info">
+                    <div class="info__time"><i class="far fa-clock"></i>
+                        <p>Clock {{$blog->created_at}}</p>
+                    </div>
+                    <div class="info__comment"><i class="far fa-comment"></i>
+                        <p>3</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@stop
+@section('content')
+<p class="paragraph">{{ $blog->body }}</p>
+<div class="post-card-quote -border">
+    <div class="qoute__icon"><i class="fas fa-quote-left"></i></div>
+    <p class="quote__content">Very little is needed to make a happy life; it is all within yourself, in your way of thinking.</p>
+    <h5 class="quote__author">_Marcus Aurelius_</h5>
+</div>
+@stop
 @section('author')
 <div class="post-footer__author">
     <div class="author__avatar"><img src="assets/images/post_detail/author.png" alt="Author avatar" /></div>
