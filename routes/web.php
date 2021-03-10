@@ -13,17 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/create', function () {
-    return view('admin.create_post');
-});
+
 
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 Route::get('/post/{slug}', [App\Http\Controllers\BlogsController::class, 'show'])->name('blog.show');
+
 Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\adminController::class, 'index'])->name('dashboard');
-
+    Route::get('/create-post',[App\Http\Controllers\BlogsController::class, 'create'])->name('blog.create');
+    Route::post('/store',[App\Http\Controllers\BlogsController::class, 'store'])->name('blog.store');
+    Route::post('/upload', [App\Http\Controllers\BlogsController::class, 'upload'])->name('upload');
     // Route::group(["prefix" => 'categories'], function () {
     //     Route::get('/', 'CategoriesController@index')->name('category.index');
     //     Route::post('/', 'CategoriesController@store')->name('category.store');

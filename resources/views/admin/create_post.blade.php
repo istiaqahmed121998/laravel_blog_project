@@ -1,8 +1,8 @@
 @extends('layouts.adminpanel')
 @section('childpagecss')
-<link rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/default.min.css">
 @endsection
+@section('title','Create Post')
 @section('sidebar')
 <div class="aside-menu-wrapper flex-column-fluid" id="kt_aside_menu_wrapper">
     <!--begin::Menu Container-->
@@ -3227,225 +3227,87 @@
 </div>
 @endsection
 @section('container')
- <!--begin::Row-->
- <div class="row">
-    <div class="col-lg-6">
-        <!--begin::Card-->
-        <div class="card card-custom example example-compact">
-            <div class="card-header">
-                <h3 class="card-title">Basic Demo</h3>
-                <div class="card-toolbar">
-                    <div class="example-tools justify-content-center">
-                        <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div id="kt_quil_1" style="height: 325px"></div>
-                <!--begin: Code-->
-                <div class="example-code mt-10">
-                    <ul class="example-nav nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-2x">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#example_code_html">HTML</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#example_code_js">JS</a>
-                        </li>
-                    </ul>
-                    <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="example_code_html" role="tabpanel">
-                            <div class="example-highlight">
-                                <pre style="height:400px">
-<code class="language-html">
-&lt;div class="card card-custom"&gt;
-&lt;div class="card-header"&gt;
-    &lt;h3 class="card-title"&gt;
-        Basic Demo
-    &lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="card-body"&gt;
-    &lt;div id="kt_quil_1" style="height: 325px"&gt;
-        Compose a message
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</code>
-</pre>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="example_code_js">
-                            <div class="example-highlight">
-                                <pre style="height:400px">
-<code class="language-js">
-// Class definition
-var KTQuilDemos = function() {
+<!--begin::Row-->
+<div class="row">
+    <div class="col-lg-12">
+        <form id="blogpost" method="POST" action="{{ route('blog.store') }}">
+        @csrf
+            <!--begin::Card-->
+            <div></div>
+            <div class="card card-custom example example-compact">
 
-// Private functions
-var demo1 = function() {
-    var quill = new Quill('#kt_quil_1', {
-        modules: {
-            toolbar: [
-                [{
-                    header: [1, 2, false]
-                }],
-                ['bold', 'italic', 'underline'],
-                ['image', 'code-block']
-            ]
-        },
-        placeholder: 'Type your text here...',
-        theme: 'snow' // or 'bubble'
-    });
-}
-
-return {
-    // public functions
-    init: function() {
-        demo1();
-        demo2();
-    }
-};
-}();
-
-jQuery(document).ready(function() {
-KTQuilDemos.init();
-});
-
-</code>
-</pre>
-                            </div>
+                <div class="card-header">
+                    <h3 class="card-title">POST YOUR BLOG</h3>
+                    <div class="card-toolbar">
+                        <div class="example-tools justify-content-center">
+                            <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
                         </div>
                     </div>
                 </div>
-                <!--end: Code-->
+
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Blog Post Title</label>
+                        <input type="text" id="title" name="title" class="form-control form-control-lg" placeholder="Title" />
+                    </div>
+                    <div class="form-group">
+                        <!-- <div id="kt-ckeditor-3-toolbar"></div>
+
+                        <div id="ktckeditor" name="body">
+
+                        </div> -->
+                        
+                        <textarea name="editor1" id="editor1">
+                    This is my textarea to be replaced with CKEditor 4.
+                    </textarea>
+                    </div>
+                    <div class="separator separator-dashed my-10"></div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-2 col-sm-12">Description</label>
+                        <div class="col-lg-4 col-md-9 col-sm-12">
+                            <textarea name="description" id="description" class="form-control" id="kt_autosize_1" rows="3"></textarea>
+                        </div>
+                        <label class="col-form-label text-left col-lg-1 col-sm-12">Keywords</label>
+                        <div class="col-lg-5 col-md-9 col-sm-12">
+                            <input id="kt_tagify_4" class="form-control" name='keywords' placeholder='Type Keywords' value='' />
+                        </div>
+                    </div>
+
+                    <div class="separator separator-dashed my-10"></div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-1 col-sm-12">Tags</label>
+                        <div class="col-lg-6 col-md-9 col-sm-8">
+                            <input id="kt_tagify_6" class="form-control" name='tags' placeholder='Type Keywords' value='' />
+                        </div>
+                        <label class="col-form-label text-left col-lg-1 col-sm-12">Category</label>
+                        <div class=" col-lg-4 col-md-9 col-sm-8">
+                            <select class="form-control select2" id="kt_select2_1" name="category">
+                                <option value=""></option>
+                                <option value="HI">Hawaii</option>
+                                <option value="CA">California</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <!--end::Card-->
+            <!--end::Card-->
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-lg-12 text-lg-right" id="kt_blockui_page_custom_text_1">
+                        <button type="submit" class="btn btn-success">POST</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="col-lg-6">
-        <!--begin::Card-->
-        <div class="card card-custom example example-compact">
-            <div class="card-header">
-                <h3 class="card-title">Auto Save</h3>
-                <div class="card-toolbar">
-                    <div class="example-tools justify-content-center">
-                        <span class="example-toggle" data-toggle="tooltip" title="View code"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div id="kt_quil_2" style="height: 325px">Compose a message</div>
-                <!--begin: Code-->
-                <div class="example-code mt-10">
-                    <ul class="example-nav nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-2x">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#example_code_html2">HTML</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#example_code_js2">JS</a>
-                        </li>
-                    </ul>
-                    <span class="example-copy" data-toggle="tooltip" title="Copy code"></span>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="example_code_html2" role="tabpanel">
-                            <div class="example-highlight">
-                                <pre style="height:400px">
-<code class="language-html">
-&lt;div class="card card-custom"&gt;
-&lt;div class="card-header"&gt;
-    &lt;h3 class="card-title"&gt;
-        Auto Save
-    &lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class="card-body"&gt;
-    &lt;div id="kt_quil_2" style="height: 325px"&gt;
-        Compose a message
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</code>
-</pre>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="example_code_js2">
-                            <div class="example-highlight">
-                                <pre style="height:400px">
-<code class="language-js">
-// Class definition
-var KTQuilDemos = function() {
 
-// Private functions
-var demo2 = function() {
-    var Delta = Quill.import('delta');
-    var quill = new Quill('#kt_quil_2', {
-        modules: {
-            toolbar: true
-        },
-        placeholder: 'Type your text here...',
-        theme: 'snow'
-    });
-
-    // Store accumulated changes
-    var change = new Delta();
-    quill.on('text-change', function(delta) {
-        change = change.compose(delta);
-    });
-
-    // Save periodically
-    setInterval(function() {
-        if (change.length() &gt; 0) {
-            console.log('Saving changes', change);
-            /*
-            Send partial changes
-            $.post('/your-endpoint', {
-            partial: JSON.stringify(change)
-            });
-
-            Send entire document
-            $.post('/your-endpoint', {
-            doc: JSON.stringify(quill.getContents())
-            });
-            */
-            change = new Delta();
-        }
-    }, 5 * 1000);
-
-    // Check for unsaved data
-    window.onbeforeunload = function() {
-        if (change.length() &gt; 0) {
-            return 'There are unsaved changes. Are you sure you want to leave?';
-        }
-    }
-}
-
-return {
-    // public functions
-    init: function() {
-        demo2();
-    }
-};
-}();
-
-jQuery(document).ready(function() {
-KTQuilDemos.init();
-});
-
-</code>
-</pre>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end: Code-->
-            </div>
-        </div>
-        <!--end::Card-->
-    </div>
 </div>
+
 <!--end::Row-->
 @endsection
 @section('childpagejs')
-
+<script src="{{asset('plugins/custom/ckeditor/ckeditor-document.bundle.js')}}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-<script src="{{asset('js/pages/crud/forms/editors/quill.js')}}"></script>
+<script src="{{asset('js/pages/crud/forms/widgets/create_blog.js')}}"></script>
+<script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
 @endsection

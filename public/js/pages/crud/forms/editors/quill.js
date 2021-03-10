@@ -2,24 +2,7 @@
 var KTQuilDemos = function() {
 
     // Private functions
-    hljs.configure({   // optionally configure hljs
-        languages: ['javascript', 'ruby', 'python']
-      });
-      var demo1 = function() {
 
-        var quill = new Quill('#kt_quil_1', {
-            modules: {
-                toolbar: true
-            },
-            placeholder: 'Type your text here...',
-            theme: 'snow'
-        });
-
-        quill.on('text-change', function() {
-            console.log('Text change!'+quill.getText());
-          });
-          
-    }
     
 
     var demo2 = function() {
