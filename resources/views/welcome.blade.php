@@ -22,7 +22,8 @@
                             <p>3</p>
                         </div>
                     </div>
-                    <p class="card__content-description">{{$blog->body}}</p><a class="more-btn" href="post_standard.html">Read more </a>
+                    
+                    {!! $blog->body !!}<a class="more-btn" href="post_standard.html">Read more </a>
                 </div>
             </div>
             @endforeach

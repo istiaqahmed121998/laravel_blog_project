@@ -41,6 +41,13 @@ var KTcreateBlog = function () {
     var tagify1GetValue = [];
     var tagify2GetValue = [];
     var getText;
+    var convertToSlug= (Text)=>
+    {
+        $('#slug').val(Text
+            .toLowerCase()
+            .replace(/[^\w ]+/g,'')
+            .replace(/ +/g,'-'));
+    }
     var tags = function () {
         var input = document.getElementById('kt_tagify_6');
         tagify1 = new Tagify(input, {
@@ -221,7 +228,8 @@ var KTcreateBlog = function () {
         // }
         {
             filebrowserUploadUrl: "upload",
-            filebrowserUploadMethod: 'form'
+            filebrowserUploadMethod: 'form',
+            disallowedContent : 'img{width,height}'
         }
         );
        // CKEDITOR.config.customConfig='customconfig.js'
@@ -237,6 +245,9 @@ var KTcreateBlog = function () {
         //  ] ; 
 
     }
+    $('#title').keyup(()=>{
+        convertToSlug($('#title').val())
+    });
     
     return {
         // public functions
@@ -247,12 +258,13 @@ var KTcreateBlog = function () {
             autoSizing();
             keywords();
             pageBlock();
+            
         }
     };
 
 }();
 
 jQuery(document).ready(function () {
-
+    
     KTcreateBlog.init();
 });

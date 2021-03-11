@@ -22,10 +22,10 @@ class BlogsController extends Controller
     }
     public function store(Request $request){
         $input = $request->all();
-        return (json_encode($input));
+        $blog = Blog::create($input);
+        return dd($blog);
     }
-        public function upload(Request $request)
-    {
+    public function upload(Request $request){
         if($request->hasFile('upload')) {
             //get filename with extension
             $filenamewithextension = $request->file('upload')->getClientOriginalName();

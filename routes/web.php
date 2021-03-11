@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
+Route::get('/post', [App\Http\Controllers\BlogsController::class, 'post'])->name('blog.post');
 Route::get('/post/{slug}', [App\Http\Controllers\BlogsController::class, 'show'])->name('blog.show');
 
 Route::middleware(['auth'])->prefix('/admin')->group(function () {

@@ -19,7 +19,7 @@ class CreateBlogsTable extends Migration
             $table->string('slug');
             $table->string('description');
             $table->string('keywords');
-            $table->string('body');
+            $table->longText('body');
             $table->timestamps();
         });
     }

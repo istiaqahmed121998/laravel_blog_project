@@ -30,12 +30,14 @@
 </div>
 @stop
 @section('content')
-<p class="paragraph">{{ $blog->body }}</p>
-<div class="post-card-quote -border">
+{!! $blog->body !!}
+<!-- <div class="post-card-quote -border">
     <div class="qoute__icon"><i class="fas fa-quote-left"></i></div>
     <p class="quote__content">Very little is needed to make a happy life; it is all within yourself, in your way of thinking.</p>
     <h5 class="quote__author">_Marcus Aurelius_</h5>
-</div>
+
+</div> -->
+<p class="paragraph"></p>
 @stop
 @section('author')
 <div class="post-footer__author">

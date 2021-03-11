@@ -3231,7 +3231,7 @@
 <div class="row">
     <div class="col-lg-12">
         <form id="blogpost" method="POST" action="{{ route('blog.store') }}">
-        @csrf
+            @csrf
             <!--begin::Card-->
             <div></div>
             <div class="card card-custom example example-compact">
@@ -3250,13 +3250,19 @@
                         <label>Blog Post Title</label>
                         <input type="text" id="title" name="title" class="form-control form-control-lg" placeholder="Title" />
                     </div>
+                    <div class="form-group row">
+                        <label class="col-form-label text-left col-lg-3 col-sm-12">{{route('blog.post')}}/</label>
+                        <div class="col-lg-8 col-md-9 col-sm-12">
+                            <input type="text" class="form-control money" id="slug" name="slug">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <!-- <div id="kt-ckeditor-3-toolbar"></div>
 
                         <div id="ktckeditor" name="body">
 
                         </div> -->
-                        
+
                         <textarea name="editor1" id="editor1">
                     This is my textarea to be replaced with CKEditor 4.
                     </textarea>

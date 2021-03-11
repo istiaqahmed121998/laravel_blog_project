@@ -22,12 +22,13 @@ CKEDITOR.stylesSet.add( 'default', [
 	// so they are not needed here by default. You may enable them to avoid
 	// placing the "Format" combo in the toolbar, maintaining the same features.
 	
-	{ name: 'Paragraph',		element: 'p' },
+	{ name: 'Paragraph',		element: 'p', attributes: { 'class': 'card__content-description' } },
+	{ name: 'Image Paragraph',		element: 'p', attributes: { 'class': 'card__cover' } },
 	{ name: 'Heading 1',		element: 'h1' },
 	{ name: 'Heading 2',		element: 'h2' },
 	{ name: 'Heading 3',		element: 'h3' },
 	{ name: 'Heading 4',		element: 'h4' },
-	{ name: 'Heading 5',		element: 'h5' },
+	{ name: 'Heading 5',		element: 'h5',attributes: { 'class': 'card__content-description' } },
 	{ name: 'Heading 6',		element: 'h6' },
 	{ name: 'Preformatted Text',element: 'pre' },
 	{ name: 'Address',			element: 'address' },
@@ -82,16 +83,22 @@ CKEDITOR.stylesSet.add( 'default', [
 
 	/* Object styles */
 
+	{ 
+		name: 'Image',
+		element: 'img', 
+		attributes: { 'class': 'image' } 
+	},
+
 	{
 		name: 'Styled Image (left)',
 		element: 'img',
-		attributes: { 'class': 'left' }
+		attributes: { 'class': 'image left' }
 	},
 
 	{
 		name: 'Styled Image (right)',
 		element: 'img',
-		attributes: { 'class': 'right' }
+		attributes: { 'class': 'image right' }
 	},
 
 	{
