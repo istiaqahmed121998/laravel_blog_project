@@ -35,10 +35,10 @@
             </div>
         </div>
         <div class="container">
-            <div class="header-wrapper"><a class="header__logo" href="index.html"><img src="./assets/images/logo.png" alt="Logo" /></a>
+            <div class="header-wrapper"><a class="header__logo" href="{{ url('/') }}"><img src="./assets/images/logo.png" alt="Logo" /></a>
                 <nav>
                     <ul>
-                        <li class="nav-item"><a href="index.html">Home</a>
+                        <li class="nav-item"><a href="{{ url('/') }}">Home</a>
                         </li>
                         <li class="nav-item active"><a>Blog</a>
                             <ul class="dropdown-menu">

@@ -22,8 +22,7 @@ CKEDITOR.stylesSet.add( 'default', [
 	// so they are not needed here by default. You may enable them to avoid
 	// placing the "Format" combo in the toolbar, maintaining the same features.
 	
-	{ name: 'Paragraph',		element: 'p', attributes: { 'class': 'card__content-description' } },
-	{ name: 'Image Paragraph',		element: 'p', attributes: { 'class': 'card__cover' } },
+	{ name: 'Paragraph',		element: 'p', attributes: { 'class': 'paragraph' } },
 	{ name: 'Heading 1',		element: 'h1' },
 	{ name: 'Heading 2',		element: 'h2' },
 	{ name: 'Heading 3',		element: 'h3' },

@@ -182,13 +182,13 @@ var KTcreateBlog = function () {
 
                 var Post = {
                     'title': $('#title').val(),
+                    'slug': $('#slug').val(),
                     'body': CKEDITOR.instances.editor1.getData(),
                     'description': $('#description').val(),
                     'tags': tagify1GetValue,
                     'keyword': tagify2GetValue,
                     'category': categorySelect.val(),
                     '_token': $('meta[name="csrf-token"]').attr('content')
-
                 };
                 $.ajax({
                     type: 'POST',

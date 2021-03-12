@@ -11,6 +11,7 @@
                 <div class="card__content">
                     <h5 class="card__content-category">Technology</h5>
                     <a class="card__content-title" href="{{route('blog.show', $blog->slug) }}">{{$blog->title}}</a>
+                    
                     <div class="card__content-info">
                         <div class="info__time info__author"><i class="far fa-user"></i>
                             <p>Jessica Stephens</p>
@@ -22,8 +23,10 @@
                             <p>3</p>
                         </div>
                     </div>
+                    <p class="card__content-description">{{ $blog->description }}</p>
                     
-                    {!! $blog->body !!}<a class="more-btn" href="post_standard.html">Read more </a>
+                    <a class="more-btn" href="{{route('blog.show', $blog->slug) }}">Read more </a>
+                    
                 </div>
             </div>
             @endforeach
