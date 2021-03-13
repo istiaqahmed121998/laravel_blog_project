@@ -181,8 +181,6 @@ var KTcreateBlog = function () {
                 });
 
                 var Post = {
-                    'title': $('#title').val(),
-                    'slug': $('#slug').val(),
                     'body': CKEDITOR.instances.editor1.getData(),
                     'description': $('#description').val(),
                     'tags': tagify1GetValue,
@@ -190,12 +188,14 @@ var KTcreateBlog = function () {
                     'category': categorySelect.val(),
                     '_token': $('meta[name="csrf-token"]').attr('content')
                 };
+                let uploadpostUrl='/admin/update/'+parseInt($.trim($('#id').text()));
                 $.ajax({
-                    type: 'POST',
-                    url: '/admin/store',
+                    type: 'PATCH',
+                    url: uploadpostUrl,
                     headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                     data: Post,
                     success: function (data) {
+                        console.log(data);
                         Swal.fire({
                             title: "Good job!",
                             text: "You clicked the button!",
