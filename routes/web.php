@@ -30,7 +30,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::patch('/update/{id}', [App\Http\Controllers\BlogsController::class, 'update'])->name('blog.edit');
     Route::delete('/delete/{id}', [App\Http\Controllers\BlogsController::class, 'delete'])->name('blog.delete');
     Route::get('/trash', [App\Http\Controllers\BlogsController::class, 'trash'])->name('blog.trash');
-    Route::delete('/trash/safe/{id}', [App\Http\Controllers\BlogsController::class, 'restore'])->name('blog.restore');
+    Route::delete('/trash/restore/{id}', [App\Http\Controllers\BlogsController::class, 'restore'])->name('blog.restore');
     Route::delete('/trash/permanent/{id}', [App\Http\Controllers\BlogsController::class, 'permanentDelete'])->name('blog.restore');
     // Route::group(["prefix" => 'categories'], function () {
     //     Route::get('/', 'CategoriesController@index')->name('category.index');
