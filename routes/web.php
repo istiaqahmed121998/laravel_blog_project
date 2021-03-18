@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,18 +20,21 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 Route::get('/post', [App\Http\Controllers\BlogsController::class, 'post'])->name('blog.post');
 Route::get('/post/{slug}', [App\Http\Controllers\BlogsController::class, 'show'])->name('blog.show');
-
+// Route::get('admin/create-post', [App\Http\Controllers\BlogsController::class, 'create'])->name('blog.create')->middleware('role:admin');
+// Route::get('/admin', [App\Http\Controllers\Admin\adminController::class, 'index'])->name('dashboard')->middleware('role:admin');
+// Route::post('/store',[App\Http\Controllers\BlogsController::class, 'store'])->name('blog.store');
 Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\adminController::class, 'index'])->name('dashboard');
     Route::get('/create-post',[App\Http\Controllers\BlogsController::class, 'create'])->name('blog.create');
     Route::post('/store',[App\Http\Controllers\BlogsController::class, 'store'])->name('blog.store');
     Route::post('/upload', [App\Http\Controllers\BlogsController::class, 'upload'])->name('upload');
     Route::get('/edit/{id}', [App\Http\Controllers\BlogsController::class, 'edit'])->name('blog.edit');
-    Route::patch('/update/{id}', [App\Http\Controllers\BlogsController::class, 'update'])->name('blog.edit');
+    Route::patch('/update/{id}', [App\Http\Controllers\BlogsController::class, 'update'])->name('blog.update');
     Route::delete('/delete/{id}', [App\Http\Controllers\BlogsController::class, 'delete'])->name('blog.delete');
     Route::get('/trash', [App\Http\Controllers\BlogsController::class, 'trash'])->name('blog.trash');
     Route::delete('/trash/restore/{id}', [App\Http\Controllers\BlogsController::class, 'restore'])->name('blog.restore');
     Route::delete('/trash/permanent/{id}', [App\Http\Controllers\BlogsController::class, 'permanentDelete'])->name('blog.restore');
+    Route::get('/bloglist', [App\Http\Controllers\BlogsController::class, 'list'])->name('blog.list');
     // Route::group(["prefix" => 'categories'], function () {
     //     Route::get('/', 'CategoriesController@index')->name('category.index');
     //     Route::post('/', 'CategoriesController@store')->name('category.store');

@@ -12,4 +12,8 @@ class Blog extends Model
     use SoftDeletes;
     protected $dates=['deleted_at'];
     protected $fillable=['title','slug','description','body'];
+    public function tags()
+    {
+    	return $this->belongsToMany('App\Models\Tag','blog_tags')->withTimestamps();
+    }
 }

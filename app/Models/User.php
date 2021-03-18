@@ -42,7 +42,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
+    public function isAdmin()
+    {
+        if ($this->role_id === 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function isWriter()
+    {
+        if ($this->role_id === 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    // public function hasRole($role){
+    //     dd($this->role()->name);
+    // }
 }

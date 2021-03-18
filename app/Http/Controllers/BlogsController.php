@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Blog;
-
+use App\Models\Tag;
 
 use Log;
 
@@ -28,8 +28,28 @@ class BlogsController extends Controller
     }
     public function store(Request $request)
     {
-        $input = $request->all();
-        $blog = Blog::create($input);
+        //$input = $request->all();
+        $blog = Blog::create([
+            'title' => $request->get('title'),
+            'body'  => $request->get('body'),
+            'slug' =>$request->get('slug'),
+            'description'=>$request->get('description'),
+
+        ]);
+        if ($blog) {
+            $tagIds = [];
+            foreach ($request->get('tags') as $tagName) {
+                //$post->tags()->create(['name'=>$tagName]);
+                //Or to take care of avoiding duplication of Tag
+                //you could substitute the above line as
+                $slug=Str::slug($tagName, '-');
+                $tag = Tag::firstOrCreate(['name' => $tagName,'slug'=>$slug]);
+                if ($tag) {
+                    $tagIds[] = $tag->id;
+                }
+            }
+            $blog->tags()->sync($tagIds);
+        }
         return dd($blog);
     }
     public function upload(Request $request)
@@ -82,18 +102,20 @@ class BlogsController extends Controller
     {
         $blog = Blog::onlyTrashed();
         return view('admin.edit_post', compact('blog'));
-        
     }
-    public function restore(Request $request,$id)
+    public function restore(Request $request, $id)
     {
         $restoredBlog = Blog::onlyTrashed()->findOrFail($id);
         $restoredBlog->restore($restoredBlog);
-        
     }
-    public function permanentDelete(Request $request,$id)
+    public function permanentDelete(Request $request, $id)
     {
         $premanentDelete = Blog::onlyTrashed()->findOrFail($id);
         $premanentDelete->forceDelete($premanentDelete);
-        
+    }
+    public function list()
+    {
+        $blogs = Blog::all();
+        return view('admin.bloglist', compact('blogs'));
     }
 }
