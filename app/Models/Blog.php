@@ -16,4 +16,9 @@ class Blog extends Model
     {
     	return $this->belongsToMany('App\Models\Tag','blog_tags')->withTimestamps();
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

@@ -35,6 +35,8 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::delete('/trash/restore/{id}', [App\Http\Controllers\BlogsController::class, 'restore'])->name('blog.restore');
     Route::delete('/trash/permanent/{id}', [App\Http\Controllers\BlogsController::class, 'permanentDelete'])->name('blog.restore');
     Route::get('/bloglist', [App\Http\Controllers\BlogsController::class, 'list'])->name('blog.list');
+
+    Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.show');
     // Route::group(["prefix" => 'categories'], function () {
     //     Route::get('/', 'CategoriesController@index')->name('category.index');
     //     Route::post('/', 'CategoriesController@store')->name('category.store');
