@@ -65,9 +65,10 @@
                         <label class="col-form-label text-left col-lg-1 col-sm-12">Category</label>
                         <div class=" col-lg-4 col-md-9 col-sm-8">
                             <select class="form-control select2" id="kt_select2_1" name="category">
-                                <option value=""></option>
-                                <option value="HI">Hawaii</option>
-                                <option value="CA">California</option>
+                            <option value=""></option>
+                                @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

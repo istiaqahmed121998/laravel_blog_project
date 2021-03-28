@@ -5,7 +5,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\Tag;
-
+use App\Models\Category;
 use Log;
 
 class BlogsController extends Controller
@@ -20,11 +20,12 @@ class BlogsController extends Controller
     {
 
         $blog = Blog::where('slug', $slug)->firstOrFail();
-        return view('post', compact('blog'));
+        return view('post', );
     }
     public function create()
     {
-        return view('admin.create_post');
+        $categories = Category::all('id','name','slug');
+        return view('admin.create_post',compact('categories'));
     }
     public function store(Request $request)
     {
