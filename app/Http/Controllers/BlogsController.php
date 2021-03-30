@@ -20,7 +20,7 @@ class BlogsController extends Controller
     {
 
         $blog = Blog::where('slug', $slug)->firstOrFail();
-        return view('post', );
+        return view('post',compact('blog') );
     }
     public function create()
     {

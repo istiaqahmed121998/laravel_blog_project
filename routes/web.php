@@ -36,9 +36,11 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::delete('/trash/permanent/{id}', [App\Http\Controllers\BlogsController::class, 'permanentDelete'])->name('blog.restore');
     Route::get('/bloglist', [App\Http\Controllers\BlogsController::class, 'list'])->name('blog.list');
     //access to admin
-    Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.show');
+    Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
+    Route::get('/category/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
     Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'list'])->name('category.list');
     Route::post('/category/store', [App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
+    Route::patch('/category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
     // Route::group(["prefix" => 'categories'], function () {
     //     Route::get('/', 'CategoriesController@index')->name('category.index');
     //     Route::post('/', 'CategoriesController@store')->name('category.store');

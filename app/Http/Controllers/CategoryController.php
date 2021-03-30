@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CategoryController extends Controller
 {
@@ -22,5 +23,17 @@ class CategoryController extends Controller
         $category=Category::firstOrNew(['name'=>$request->get('name'),'slug'=>$request->get('slug')]);
         $category->save();
         return $category;
+    }
+    public function show($id)
+    {
+        $category = Category::findOrFail($id, array('id', 'name', 'slug'));
+        //$category = Category::where('id', $id)->firstOrFail();
+        return $category;
+    }
+    public function update(Request $request, $id)
+    {
+        $input = $request->all();
+        $category = Category::findOrFail($id);
+        $category->update($input);
     }
 }
