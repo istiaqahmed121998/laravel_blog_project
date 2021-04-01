@@ -215,7 +215,7 @@
                             <div class="d-flex flex-column text-dark-75">
                                 <span class="font-weight-bolder font-size-sm">View</span>
                                 <span class="font-weight-bolder font-size-h5">
-                                    <span class="text-dark-50 font-weight-bold"></span>249,500</span>
+                                    <span class="text-dark-50 font-weight-bold"></span>00</span>
                             </div>
                         </div>
                         <!--end: Item-->
@@ -227,7 +227,7 @@
                                 <i class="flaticon-chat-1 icon-2x text-muted font-weight-bold"></i>
                             </span>
                             <div class="d-flex flex-column">
-                                <span class="text-dark-75 font-weight-bolder font-size-sm">648 Comments</span>
+                                <span class="text-dark-75 font-weight-bolder font-size-sm">0 Comments</span>
                                 <a href="#" class="text-primary font-weight-bolder">View</a>
                             </div>
                         </div>
@@ -266,40 +266,8 @@
         @endforeach
             <!--end::Card-->
             <!--begin::Pagination-->
-            <div class="card card-custom">
-                <div class="card-body py-7">
-                    <!--begin::Pagination-->
-                    <div class="d-flex justify-content-between align-items-center flex-wrap">
-                        <div class="d-flex flex-wrap mr-3">
-                            <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1">
-                                <i class="ki ki-bold-double-arrow-back icon-xs"></i>
-                            </a>
-                            <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1">
-                                <i class="ki ki-bold-arrow-back icon-xs"></i>
-                            </a>
-                            <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary active mr-2 my-1">1</a>
-                            <a href="#" class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">...</a>
-                            <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1">
-                                <i class="ki ki-bold-arrow-next icon-xs"></i>
-                            </a>
-                            <a href="#" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1">
-                                <i class="ki ki-bold-double-arrow-next icon-xs"></i>
-                            </a>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <select class="form-control form-control-sm text-primary font-weight-bold mr-4 border-0 bg-light-primary" style="width: 75px;">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                            <span class="text-muted">Displaying 10 of 230 records</span>
-                        </div>
-                    </div>
-                    <!--end:: Pagination-->
-                </div>
-            </div>
+            {{ $blogs->links('vendor.pagination.custom') }}
+           
             <!--end::Pagination-->
         </div>
         <!--end::Container-->

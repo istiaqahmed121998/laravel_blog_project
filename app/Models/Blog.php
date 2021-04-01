@@ -11,7 +11,8 @@ class Blog extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates=['deleted_at'];
-    protected $fillable=['title','slug','description','body'];
+    protected $fillable=['title','slug','description','body','category_id'];
+    
     public function tags()
     {
     	return $this->belongsToMany('App\Models\Tag','blog_tags')->withTimestamps();

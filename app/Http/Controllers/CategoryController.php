@@ -36,4 +36,10 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->update($input);
     }
+    public function showslug($slug){
+        $category= Category::where('slug', $slug)->firstOrFail();
+        $categories=Category::take(5)->get()->sortByDesc('created_at');
+        return view('category',compact('category','categories'));
+
+    }
 }

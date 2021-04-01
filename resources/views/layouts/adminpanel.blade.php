@@ -137,11 +137,11 @@
                                     </li>
                                     @if(Auth::user()->role->id ==1)
                                     <li class="menu-item" aria-haspopup="true">
-                                        <a href="layout/themes/aside-light.html" class="menu-link">
+                                        <a href="{{route('category.index')}}" class="menu-link">
                                             <i class="menu-bullet menu-bullet-dot">
                                                 <span></span>
                                             </i>
-                                            <span class="menu-text">Light Aside</span>
+                                            <span class="menu-text">Category List</span>
                                         </a>
                                     </li>
                                     @endif

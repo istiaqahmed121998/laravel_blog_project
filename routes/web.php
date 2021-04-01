@@ -37,7 +37,8 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('/bloglist', [App\Http\Controllers\BlogsController::class, 'list'])->name('blog.list');
     //access to admin
     Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
-    Route::get('/category/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
+    Route::get('/category/show/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
+    Route::get('/category/{slug}', [App\Http\Controllers\CategoryController::class, 'showslug'])->name('category.showslug');
     Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'list'])->name('category.list');
     Route::post('/category/store', [App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
     Route::patch('/category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');

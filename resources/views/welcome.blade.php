@@ -9,7 +9,7 @@
             @foreach($blogs ?? '' as $blog)
             <div class="post-card -full -center"><a class="card__cover" href="{{route('blog.show', $blog->slug) }}"><img src="assets/images/posts/1.png" alt="Looking for some feedback for this rejected track" /></a>
                 <div class="card__content">
-                    <h5 class="card__content-category">Technology</h5>
+                    <h5 class="card__content-category">{{$blog->category->name}}</h5>
                     <a class="card__content-title" href="{{route('blog.show', $blog->slug) }}">{{$blog->title}}</a>
                     
                     <div class="card__content-info">
@@ -17,7 +17,7 @@
                             <p>Jessica Stephens</p>
                         </div>
                         <div class="info__time"><i class="far fa-clock"></i>
-                            <p>Clock Wed 02, 2019</p>
+                            <p>Clock {{$blog->created_at}}</p>
                         </div>
                         <div class="info__comment"><i class="far fa-comment"></i>
                             <p>3</p>
@@ -49,12 +49,14 @@
     <div class="center-line-title">
         <h5>Categories</h5>
     </div>
-    <a class="category -bar " href="blog_category_grid.html">
+    @foreach($categories as $category)
+    <a class="category -bar " href="{{route('category.showslug',$category->slug)}}">
         <div class="category__background" style="background-image: url(assets/images/backgrounds/category-1.png)">
         </div>
-        <h5 class="title">Design</h5>
+        <h5 class="title">{{$category->name}}</h5>
         <h5 class="quantity">12</h5>
     </a>
+    @endforeach
 </div>
 @stop
 @section('trending_post')

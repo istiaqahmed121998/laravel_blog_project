@@ -12,7 +12,9 @@ class BlogsController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::take(20)
+        ->get()
+        ->sortByDesc('created_at')->category();
         return view('welcome', compact('blogs'));
     }
 
@@ -35,6 +37,7 @@ class BlogsController extends Controller
             'body'  => $request->get('body'),
             'slug' =>$request->get('slug'),
             'description'=>$request->get('description'),
+            'category_id'=>$request->get('category'),
 
         ]);
         if ($blog) {
@@ -116,7 +119,7 @@ class BlogsController extends Controller
     }
     public function list()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(10);
         return view('admin.bloglist', compact('blogs'));
     }
 }

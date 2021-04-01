@@ -53,7 +53,7 @@ var categoryClass = function () {
             categoryId = $(this).data('id');
             $.ajax({
                 type: 'GET',
-                url: '/admin/category/'+categoryId,
+                url: '/admin/category/show'+categoryId,
                 headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                 success: function (data) {
                     $('#editcategoryname').val(data.name);
