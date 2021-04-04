@@ -54,7 +54,7 @@
         <div class="category__background" style="background-image: url(assets/images/backgrounds/category-1.png)">
         </div>
         <h5 class="title">{{$category->name}}</h5>
-        <h5 class="quantity">12</h5>
+        <h5 class="quantity">{{$category->posts->count()}}</h5>
     </a>
     @endforeach
 </div>

@@ -22,4 +22,8 @@ class Blog extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function profile()
+    {
+        return $this->belongsTo(Profile::class);
+    }
 }

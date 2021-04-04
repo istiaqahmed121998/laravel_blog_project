@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Blog;
@@ -13,8 +14,8 @@ class BlogsController extends Controller
     public function index()
     {
         $blogs = Blog::take(20)
-        ->get()
-        ->sortByDesc('created_at')->category();
+            ->get()
+            ->sortByDesc('created_at')->category();
         return view('welcome', compact('blogs'));
     }
 
@@ -22,12 +23,21 @@ class BlogsController extends Controller
     {
 
         $blog = Blog::where('slug', $slug)->firstOrFail();
-        return view('post',compact('blog') );
+        
+        // // get previous blog id
+        $previous = Blog::where('id', '<', $blog->id)->orderBy('id','desc')->first();
+
+        // // get next blog id
+        $next = Blog::where('id', '>', $blog->id)->orderBy('id','desc')->first();
+
+        $categories=Category::inRandomOrder()->take(5)->get()->sortByDesc('created_at');
+        
+        return view('post', compact('blog','previous','next','categories'));
     }
     public function create()
     {
-        $categories = Category::all('id','name','slug');
-        return view('admin.create_post',compact('categories'));
+        $categories = Category::all('id', 'name', 'slug');
+        return view('admin.create_post', compact('categories'));
     }
     public function store(Request $request)
     {
@@ -35,9 +45,9 @@ class BlogsController extends Controller
         $blog = Blog::create([
             'title' => $request->get('title'),
             'body'  => $request->get('body'),
-            'slug' =>$request->get('slug'),
-            'description'=>$request->get('description'),
-            'category_id'=>$request->get('category'),
+            'slug' => $request->get('slug'),
+            'description' => $request->get('description'),
+            'category_id' => $request->get('category'),
 
         ]);
         if ($blog) {
@@ -46,8 +56,8 @@ class BlogsController extends Controller
                 //$post->tags()->create(['name'=>$tagName]);
                 //Or to take care of avoiding duplication of Tag
                 //you could substitute the above line as
-                $slug=Str::slug($tagName, '-');
-                $tag = Tag::firstOrCreate(['name' => $tagName,'slug'=>$slug]);
+                $slug = Str::slug($tagName, '-');
+                $tag = Tag::firstOrCreate(['name' => $tagName, 'slug' => $slug]);
                 if ($tag) {
                     $tagIds[] = $tag->id;
                 }

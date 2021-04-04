@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -55,6 +57,20 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
+    public function incrementSlug($slug) {
+
+        $original = $slug;
+    
+        $count = 2;
+    
+        while (Profile::where('profile_link', '=', $slug)->exists()) {
+    
+            $slug = "{$original}-" . $count++;
+        }
+    
+        return $slug;
+    
+    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -64,10 +80,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id'=>3,
         ]);
+        $profile_slug=Str::slug($user->name,'-');
+        if (Profile::where('profile_link', '=', $profile_slug)->exists()) {
+            $profile_slug=$this->incrementSlug($profile_slug);
+        }
+        $user->profile()->save(new Profile([
+            'profile_link' => $profile_slug,
+        ]));
+        return $user;
     }
 }

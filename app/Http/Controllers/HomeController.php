@@ -11,7 +11,7 @@ class HomeController extends Controller
         $blogs=Blog::take(5)
         ->get()
         ->sortByDesc('created_at');
-        $categories=Category::take(5)->get()->sortByDesc('created_at');
+        $categories=Category::inRandomOrder()->take(5)->get()->sortByDesc('created_at');
         return view('welcome',compact('blogs','categories'));
     }
 }

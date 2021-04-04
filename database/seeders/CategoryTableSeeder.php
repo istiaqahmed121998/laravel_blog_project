@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Category;
 
-class CategoryTableSedder extends Seeder
+class CategoryTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,14 +18,22 @@ class CategoryTableSedder extends Seeder
         $tech->name="tech";
         $tech->slug="tech";
         $tech->save();
-        $animal= new Category();
-        $animal->name="animal";
-        $animal->slug="animal";
-        $animal->save();
+        $pet= new Category();
+        $pet->name="pet";
+        $pet->slug="pet";
+        $pet->save();
         $health= new Category();
         $health->name="health";
         $health->slug="health";
         $health->save();
+        $electronics= new Category();
+        $electronics->name="electronics";
+        $electronics->slug="electronics";
+        $electronics->save();
+        $news= new Category();
+        $news->name="news";
+        $news->slug="news";
+        $news->save();
         
     }
 }

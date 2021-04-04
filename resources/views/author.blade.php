@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Blog Category List</title>
+    <title>Author</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" />
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.13.0/css/pro.min.css" />
     <link rel="shortcut icon" type="image/png" href="./assets/images/fav.png" />
@@ -21,7 +21,7 @@
 <body>
     <div id="load">
         <div class="load__content">
-            <div class="load__icon"><img src="{{asset('assets/images/icons/load.gif')}}" alt="Loading icon" /></div>
+            <div class="load__icon"><img src="assets/images/icons/load.gif" alt="Loading icon" /></div>
         </div>
     </div>
     <header class="theme-default">
@@ -50,7 +50,7 @@
                                 <li><a href="homepage9.html">HOMEPAGE9</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item active"><a>Blog</a>
+                        <li class="nav-item"><a>Blog</a>
                             <ul class="dropdown-menu">
                                 <li><a href="blog_category_grid.html">BLOG CATEGORY GRID</a></li>
                                 <li><a href="blog_category_list.html">BLOG CATEGORY LIST</a></li>
@@ -63,7 +63,7 @@
                                 <li><a href="post_quote.html">POST QUOTE</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item"><a href="#">Pages</a>
+                        <li class="nav-item active"><a href="#">Pages</a>
                             <ul class="dropdown-menu">
                                 <li><a href="author.html">AUTHOR</a></li>
                                 <li><a href="about.html">ABOUT</a></li>
@@ -90,9 +90,23 @@
             <div class="breadcrumb">
                 <ul>
                     <li><a href="index.html"> <i class="fas fa-home"></i>Home</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li class="active"><a href="#">Category</a></li>
+                    <li><a href="#">Feature</a></li>
+                    <li class="active"><a href="#">Author</a></li>
                 </ul>
+            </div>
+            <div class="author-info-block">
+                <div class="author-info-block__avatar"><img src="assets/images/post_detail/author.png" alt="Author avatar" /></div>
+                <div class="author-info-block__info">
+                    <h5>{{$profile->user->name}}</h5>
+                    <p>{{$profile->about_me}}</p>
+                    <div class="social-media">
+                        <a href="@if(is_null($profile->facebook))@else{{$profile->facebook}} @endif"><i class="fab fa-facebook-f"></i></a>
+                        <a href="@if(is_null($profile->twitter))@else{{$profile->twitter}} @endif"><i class="fab fa-twitter"></i></a>
+                        <a href="@if(is_null($profile->instagram))@else{{$profile->instagram}} @endif"><i class="fab fa-instagram"></i></a>
+                        <a href="@if(is_null($profile->website))@else{{$profile->website}} @endif"><i class="fab fa-dribbble"></i>
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="category">
                 <div class="row">
@@ -101,15 +115,23 @@
                             <div class="blog-sidebar-section -category">
                                 <div class="center-line-title">
                                     <h5>Categories</h5>
-                                </div>
-                                @foreach($categories as $category)
-                                <a class="category -bar " href="{{route('category.showslug',$category->slug)}}">
-                                    <div class="category__background" style="background-image: url('{{asset('assets/images/backgrounds/category-1.png')}}')">
-                                    </div>
-                                    <h5 class="title">{{$category->name}}</h5>
-                                    <h5 class="quantity">{{$category->posts->count()}}</h5>
+                                </div><a class="category -bar " href="blog_category_grid.html">
+                                    <div class="category__background" style="background-image: url(assets/images/backgrounds/category-1.png)"></div>
+                                    <h5 class="title">Design</h5>
+                                    <h5 class="quantity">12</h5>
+                                </a><a class="category -bar " href="blog_category_grid.html">
+                                    <div class="category__background" style="background-image: url(assets/images/backgrounds/category-2.png)"></div>
+                                    <h5 class="title">Graphic</h5>
+                                    <h5 class="quantity">6</h5>
+                                </a><a class="category -bar " href="blog_category_grid.html">
+                                    <div class="category__background" style="background-image: url(assets/images/backgrounds/category-3.png)"></div>
+                                    <h5 class="title">Illustrator</h5>
+                                    <h5 class="quantity">15</h5>
+                                </a><a class="category -bar " href="blog_category_grid.html">
+                                    <div class="category__background" style="background-image: url(assets/images/backgrounds/category-4.png)"></div>
+                                    <h5 class="title">Typography</h5>
+                                    <h5 class="quantity">8</h5>
                                 </a>
-                                @endforeach
                             </div>
                             <div class="blog-sidebar-section -trending-post">
                                 <div class="center-line-title">
@@ -117,7 +139,7 @@
                                 </div>
                                 <div class="trending-post">
                                     <div class="trending-post_image">
-                                        <div class="rank">1</div><img src="assets/images/backgrounds/trending-post-1.png" alt="Shifting to Vegan Diets May Cause Brain Nutrient...">
+                                        <div class="rank">1</div><img src="assets/images/backgrounds/trending-post-1.png" alt="Shifting to Vegan Diets May Cause Brain Nutrient..." />
                                     </div>
                                     <div class="trending-post_content">
                                         <h5>Illustrator</h5><a href="post_standard.html">Shifting to Vegan Diets May Cause Brain Nutrient...</a>
@@ -128,7 +150,7 @@
                                 </div>
                                 <div class="trending-post">
                                     <div class="trending-post_image">
-                                        <div class="rank">2</div><img src="assets/images/backgrounds/trending-post-2.png" alt="The GQ Men Of The Year Awards 2019: Hrithik...">
+                                        <div class="rank">2</div><img src="assets/images/backgrounds/trending-post-2.png" alt="The GQ Men Of The Year Awards 2019: Hrithik..." />
                                     </div>
                                     <div class="trending-post_content">
                                         <h5>Design</h5><a href="post_standard.html">The GQ Men Of The Year Awards 2019: Hrithik...</a>
@@ -139,7 +161,7 @@
                                 </div>
                                 <div class="trending-post">
                                     <div class="trending-post_image">
-                                        <div class="rank">3</div><img src="assets/images/backgrounds/trending-post-3.png" alt="Here's How Your Diet Can Help Yo Excel in Exams">
+                                        <div class="rank">3</div><img src="assets/images/backgrounds/trending-post-3.png" alt="Here's How Your Diet Can Help Yo Excel in Exams" />
                                     </div>
                                     <div class="trending-post_content">
                                         <h5>Illustrator</h5><a href="post_standard.html">Here's How Your Diet Can Help Yo Excel in Exams</a>
@@ -150,7 +172,7 @@
                                 </div>
                                 <div class="trending-post">
                                     <div class="trending-post_image">
-                                        <div class="rank">4</div><img src="assets/images/backgrounds/trending-post-4.png" alt="why others accept while AudioJungle...">
+                                        <div class="rank">4</div><img src="assets/images/backgrounds/trending-post-4.png" alt="why others accept while AudioJungle..." />
                                     </div>
                                     <div class="trending-post_content">
                                         <h5>Graphic</h5><a href="post_standard.html">why others accept while AudioJungle...</a>
@@ -161,7 +183,7 @@
                                 </div>
                                 <div class="trending-post">
                                     <div class="trending-post_image">
-                                        <div class="rank">5</div><img src="assets/images/backgrounds/trending-post-5.png" alt="Podcast audio episode with YouTube license question">
+                                        <div class="rank">5</div><img src="assets/images/backgrounds/trending-post-5.png" alt="Podcast audio episode with YouTube license question" />
                                     </div>
                                     <div class="trending-post_content">
                                         <h5>Typography</h5><a href="post_standard.html">Podcast audio episode with YouTube license question</a>
@@ -174,23 +196,24 @@
                             <form class="subcribe-box subcribe-box" action="/" method="POST">
                                 <h5>Subcribe</h5>
                                 <p>Lorem ipsum dolor amet, consectetur adipiscing elit, sed tempor.</p>
-                                <input placeholder="Your email" name="email" type="email"><a class="btn -normal" href="#">Subcribe</a>
+                                <input placeholder="Your email" name="email" type="email" /><a class="btn -normal" href="#">Subcribe</a>
                             </form>
                         </div>
                     </div>
                     <div class="col-12 col-md-7 col-lg-8 order-md-1">
                         <div class="category__header">
                             <div class="category__header__text">
-                                <h5>Categories:</h5><a href="#">{{$category->name}}</a>
+                                <h5>Categories:</h5><a href="#">Typography</a>
                             </div>
+                            <div class="category__header__filter"><a class="category__header__filter__item" href="javascript:void(0)" data-layout="grid"><i class="fas fa-th"></i></a><a class="category__header__filter__item active" href="javascript:void(0)" data-layout="list"><i class="fas fa-bars"></i></a></div>
                         </div>
                         <div class="category_content">
                             <div class="row">
-                                @foreach ($category->posts as $post)
+                                @foreach ($profile->posts as $post)
                                 <div class="col-12">
                                     <div class="post-card -small -horizontal"><a class="card__cover" href="{{route('blog.show',$post->slug)}}" tabindex="0"><img src="{{asset('assets/images/posts/1.png')}}" alt="{{$post->name}}"></a>
                                         <div class="card__content">
-                                            <h5 class="card__content-category">{{$category->name}}</h5>
+                                            <h5 class="card__content-category">{{$post->category->name}}</h5>
                                             <a class="card__content-title" href="{{route('blog.show',$post->slug)}}" tabindex="0">{{$post->title}}</a>
                                             <div class="card__content-info">
                                                 <div class="info__time"><i class="far fa-clock"></i>
@@ -207,18 +230,19 @@
                                 @endforeach
                             </div>
                         </div>
-
                         <div class="pagination">
                             <ul>
                                 <li class="active"><a href="javascript:void(0)">1</a></li>
                                 <li class="pagination__page-number"><a href="javascript:void(0)">2</a></li>
                                 <li class="pagination__page-number"><a href="javascript:void(0)">3</a></li>
-                                <li><a class="next" href="javascript:void(0)">&gt;</a></li>
+                                <li><a class="next" href="javascript:void(0)">></a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="container">
             <div class="instagrams">
                 <div class="instagrams-container"><a class="instagrams-item" href="https://www.instagram.com/"><img src="assets/images/instagram/1.png" alt="Instagram image" />
                         <div class="instagrams-item__content"><i class="fab fa-instagram"></i>

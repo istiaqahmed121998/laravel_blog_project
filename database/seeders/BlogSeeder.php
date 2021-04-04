@@ -27,7 +27,7 @@ class BlogSeeder extends Seeder
         // Populate the pivot table
         Blog::all()->each(function ($blog) use ($tags) {
             $blog->tags()->sync(
-                $tags->random(rand(1, 3))->pluck('id')->toArray()
+                $tags->random(rand(1, 5))->pluck('id')->toArray()
             );
         });
     }

@@ -1,5 +1,5 @@
 @extends('layouts.blog')
-@section('title', 'Homepage')
+@section('title', $blog->title)
 @section('meta')
 @stop
 @section('share')
@@ -15,7 +15,7 @@
         <div class="post-card -center">
             <div></div>
             <div class="card__content">
-                <h5 class="card__content-category">Typography</h5><a class="card__content-title" href="{{route('blog.show', $blog->slug) }}">{{$blog->title}}</a>
+                <h5 class="card__content-category">{{$blog->category->name}}</h5><a class="card__content-title" href="{{route('blog.show', $blog->slug) }}">{{$blog->title}}</a>
                 <div class="card__content-info">
                     <div class="info__time"><i class="far fa-clock"></i>
                         <p>Clock {{$blog->created_at}}</p>
@@ -41,11 +41,18 @@
 @stop
 @section('author')
 <div class="post-footer__author">
-    <div class="author__avatar"><img src="assets/images/post_detail/author.png" alt="Author avatar" /></div>
+    <div class="author__avatar"><img src="{{asset('assets/images/post_detail/author.png')}}" alt="Author avatar" /></div>
     <div class="author__info">
-        <h5>Lena Mollein</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse vel facilisis. </p>
-        <div class="social-media"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-dribbble"></i></a></div>
+        <h5>{{$blog->profile->user->name}}</h5>
+        <p>{{$blog->profile->about_me}} </p>
+
+        <div class="social-media">
+            <a href="@if(is_null($blog->profile->facebook))@else{{$blog->profile->facebook}} @endif"><i class="fab fa-facebook-f"></i></a>
+            <a href="@if(is_null($blog->profile->twitter))@else{{$blog->profile->twitter}} @endif"><i class="fab fa-twitter"></i></a>
+            <a href="@if(is_null($blog->profile->instagram))@else{{$blog->profile->instagram}} @endif"><i class="fab fa-instagram"></i></a>
+            <a href="@if(is_null($blog->profile->website))@else{{$blog->profile->website}} @endif"><i class="fab fa-dribbble"></i>
+            </a>
+        </div>
     </div>
 </div>
 @stop
@@ -56,29 +63,33 @@
 </div>
 @stop
 @section('previous_post')
-<div class="post-footer__related__item -prev"><a href="post_standard.html"> <i class="fas fa-chevron-left"></i>Previous posts</a>
-    <div class="post-footer__related__item__content"><img src="assets/images/posts/2.png" alt="Relate news image" />
+@if($previous)
+<div class="post-footer__related__item -prev"><a href="{{route('blog.show',$previous->slug)}}"> <i class="fas fa-chevron-left"></i>Previous posts</a>
+    <div class="post-footer__related__item__content"><img src="{{asset('assets/images/posts/2.png')}}" alt="Relate news image" />
         <div class="post-card ">
             <div></div>
             <div class="card__content">
-                <h5 class="card__content-category">Typography</h5><a class="card__content-title" href="post_standard.html">How to name, save and export a finish template</a>
+                <h5 class="card__content-category">{{$previous->category->name}}</h5><a class="card__content-title" href="{{route('blog.show',$previous->slug)}}">{{$previous->title}}</a>
             </div>
         </div>
     </div>
 </div>
+@endif
 @stop
 @section('next_post')
-<div class="post-footer__related__item -next"><a href="post_standard.html">
+@if($next)
+<div class="post-footer__related__item -next"><a href="{{route('blog.show',$next->slug)}}">
         Next posts<i class="fas fa-chevron-right"></i></a>
     <div class="post-footer__related__item__content">
         <div class="post-card -right">
             <div></div>
             <div class="card__content">
-                <h5 class="card__content-category">Graphic</h5><a class="card__content-title" href="post_standard.html">I want to create a logo with illustrator hacker</a>
+                <h5 class="card__content-category">{{$next->category->name}}</h5><a class="card__content-title" href="{{route('blog.show',$next->slug)}}">{{$next->title}}</a>
             </div>
-        </div><img src="assets/images/posts/3.png" alt="Relate news image" />
+        </div><img src="{{asset('assets/images/posts/3.png')}}" alt="Relate news image" />
     </div>
 </div>
+@endif
 @stop
 @section('comments')
 <div class="post-footer__comment">
@@ -158,23 +169,15 @@
 <div class="blog-sidebar-section -category">
     <div class="center-line-title">
         <h5>Categories</h5>
-    </div><a class="category -bar " href="blog_category_grid.html">
-        <div class="category__background" style="background-image: url(assets/images/backgrounds/category-1.png)"></div>
-        <h5 class="title">Design</h5>
-        <h5 class="quantity">12</h5>
-    </a><a class="category -bar " href="blog_category_grid.html">
-        <div class="category__background" style="background-image: url(assets/images/backgrounds/category-2.png)"></div>
-        <h5 class="title">Graphic</h5>
-        <h5 class="quantity">6</h5>
-    </a><a class="category -bar " href="blog_category_grid.html">
-        <div class="category__background" style="background-image: url(assets/images/backgrounds/category-3.png)"></div>
-        <h5 class="title">Illustrator</h5>
-        <h5 class="quantity">15</h5>
-    </a><a class="category -bar " href="blog_category_grid.html">
-        <div class="category__background" style="background-image: url(assets/images/backgrounds/category-4.png)"></div>
-        <h5 class="title">Typography</h5>
-        <h5 class="quantity">8</h5>
+    </div>
+    @foreach($categories as $category)
+    <a class="category -bar " href="{{route('category.showslug',$category->slug)}}">
+        <div class="category__background" style="background-image: url('{{asset('assets/images/backgrounds/category-1.png')}}')">
+        </div>
+        <h5 class="title">{{$category->name}}</h5>
+        <h5 class="quantity">{{$category->posts->count()}}</h5>
     </a>
+    @endforeach
 </div>
 @stop
 @section('trending_post')

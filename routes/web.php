@@ -20,6 +20,8 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 Route::get('/post', [App\Http\Controllers\BlogsController::class, 'post'])->name('blog.post');
 Route::get('/post/{slug}', [App\Http\Controllers\BlogsController::class, 'show'])->name('blog.show');
+Route::get('/profile/{slug}', [App\Http\Controllers\ProfileController::class, 'show'])->name('blog.show');
+Route::get('/category/{slug}', [App\Http\Controllers\CategoryController::class, 'showslug'])->name('category.showslug');
 // Route::get('admin/create-post', [App\Http\Controllers\BlogsController::class, 'create'])->name('blog.create')->middleware('role:admin');
 // Route::get('/admin', [App\Http\Controllers\Admin\adminController::class, 'index'])->name('dashboard')->middleware('role:admin');
 // Route::post('/store',[App\Http\Controllers\BlogsController::class, 'store'])->name('blog.store');
@@ -38,7 +40,7 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     //access to admin
     Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/show/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
-    Route::get('/category/{slug}', [App\Http\Controllers\CategoryController::class, 'showslug'])->name('category.showslug');
+
     Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'list'])->name('category.list');
     Route::post('/category/store', [App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
     Route::patch('/category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
