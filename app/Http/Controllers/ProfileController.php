@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profile;
+use App\Models\Blog;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -46,7 +49,11 @@ class ProfileController extends Controller
     public function show($slug)
     {
         $profile = Profile::where('profile_link', $slug)->firstOrFail();
-        return view('author',compact('profile'));
+        
+        $posts=Blog::where('profile_user_id', $profile->user_id)->paginate(6);
+        $categories=Category::inRandomOrder()->take(5)->get()->sortByDesc('created_at');
+        $tags=Tag::inRandomOrder()->take(5)->get()->sortByDesc('created_at');
+        return view('author',compact('profile','posts','categories','tags'));
     }
 
     /**

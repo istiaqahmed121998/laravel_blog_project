@@ -43,7 +43,7 @@
 <div class="post-footer__author">
     <div class="author__avatar"><img src="{{asset('assets/images/post_detail/author.png')}}" alt="Author avatar" /></div>
     <div class="author__info">
-        <h5>{{$blog->profile->user->name}}</h5>
+        <a href="{{route('profile.show',$blog->profile->profile_link)}}">{{$blog->profile->user->name}}</a>
         <p>{{$blog->profile->about_me}} </p>
 
         <div class="social-media">

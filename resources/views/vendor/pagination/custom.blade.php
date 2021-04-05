@@ -13,9 +13,6 @@
                 @if (is_string($element))
                     <a class="btn btn-icon btn-sm border-0 btn-hover-primary mr-2 my-1">{{ $element }}</a>
                 @endif
-
-
-
                 @if (is_array($element))
                 @foreach ($element as $page => $url)
                 @if ($page == $paginator->currentPage())
@@ -26,17 +23,12 @@
                 @endforeach
                 @endif
                 @endforeach
-
                 @if ($paginator->hasMorePages())
                 <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="btn btn-icon btn-sm btn-light-primary mr-2 my-1">
                     <i class="ki ki-bold-arrow-next icon-xs"></i>
                 </a>
                 @else
-                
                 @endif
-
-                
-
             </div>
         </div>
         <!--end:: Pagination-->

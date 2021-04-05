@@ -9,8 +9,7 @@ class Tag extends Model
 {
     use HasFactory;
     protected $fillable = ['name','slug'];
-    public function posts()
-    {
+    public function posts(){
         return $this->belongsToMany('App\Models\Blog', 'blog_tags')->orderBy('created_at', 'DESC')->paginate(5);
     }
     public function getRouteKeyName()

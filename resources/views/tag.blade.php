@@ -1,29 +1,15 @@
 @extends('layouts.front')
-@section('title',"Profile -".$profile->user->name)
+@section('title','Tag - '.$tag->name)
 @section('breadcrumb')
 <div class="breadcrumb">
     <ul>
         <li><a href="index.html"> <i class="fas fa-home"></i>Home</a></li>
-        <li><a href="#">Feature</a></li>
-        <li class="active"><a href="#">Author</a></li>
+        <li><a href="#">Blog</a></li>
+        <li class="active"><a href="#">Tag</a></li>
     </ul>
 </div>
 @endsection
-@section('extra')
-<div class="author-info-block">
-    <div class="author-info-block__avatar"><img src="../assets/images/post_detail/author.png" alt="Author avatar" /></div>
-    <div class="author-info-block__info">
-        <h5>{{$profile->user->name}}</h5>
-        <p>{{$profile->about_me}}</p>
-        <div class="social-media">
-            <a href="@if(is_null($profile->facebook))@else{{$profile->facebook}} @endif"><i class="fab fa-facebook-f"></i></a>
-            <a href="@if(is_null($profile->twitter))@else{{$profile->twitter}} @endif"><i class="fab fa-twitter"></i></a>
-            <a href="@if(is_null($profile->instagram))@else{{$profile->instagram}} @endif"><i class="fab fa-instagram"></i></a>
-            <a href="@if(is_null($profile->website))@else{{$profile->website}} @endif"><i class="fab fa-dribbble"></i>
-            </a>
-        </div>
-    </div>
-</div>
+@section('category')
 @endsection
 @section('trending_post')
 <div class="blog-sidebar-section -trending-post">
@@ -88,13 +74,18 @@
 </div>
 @endsection
 @section('posts')
+<div class="category__header">
+    <div class="category__header__text">
+        <h5>Tag:</h5><a href="#">{{$tag->name}}</a>
+    </div>
+</div>
 <div class="category_content">
     <div class="row">
         @foreach ($posts as $post)
         <div class="col-12">
             <div class="post-card -small -horizontal"><a class="card__cover" href="{{route('blog.show',$post->slug)}}" tabindex="0"><img src="{{asset('assets/images/posts/1.png')}}" alt="{{$post->name}}"></a>
                 <div class="card__content">
-                    <h5 class="card__content-category">{{$post->category->name}}</h5>
+                    <h5 class="card__content-category">{{$tag->name}}</h5>
                     <a class="card__content-title" href="{{route('blog.show',$post->slug)}}" tabindex="0">{{$post->title}}</a>
                     <div class="card__content-info">
                         <div class="info__time"><i class="far fa-clock"></i>

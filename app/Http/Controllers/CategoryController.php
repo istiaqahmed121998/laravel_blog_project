@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -39,7 +40,9 @@ class CategoryController extends Controller
     public function showslug($slug){
         $category= Category::where('slug', $slug)->firstOrFail();
         $categories=Category::inRandomOrder()->take(5)->get()->sortByDesc('created_at');
-        return view('category',compact('category','categories'));
+        $posts=$category->posts()->paginate(6);
+        $tags=Tag::inRandomOrder()->take(5)->get()->sortByDesc('created_at');
+        return view('category',compact('category','categories','posts','tags'));
 
     }
 }
