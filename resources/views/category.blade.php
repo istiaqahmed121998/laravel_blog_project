@@ -75,31 +75,27 @@
 @section('posts')
 <div class="category__header">
     <div class="category__header__text">
-        <h5>Categories:</h5><a href="#">{{$category->name}}</a>
+        <h5>Categories:</h5><a href="#">Typography</a>
     </div>
+    <div class="category__header__filter"><a class="category__header__filter__item active" href="javascript:void(0)" data-layout="grid"><i class="fas fa-th"></i></a><a class="category__header__filter__item" href="javascript:void(0)" data-layout="list"><i class="fas fa-bars"></i></a></div>
 </div>
-<div class="category_content">
-    <div class="row">
-        @foreach ($posts as $post)
-        <div class="col-12">
-            <div class="post-card -small -horizontal"><a class="card__cover" href="{{route('blog.show',$post->slug)}}" tabindex="0"><img src="{{asset('assets/images/posts/1.png')}}" alt="{{$post->name}}"></a>
-                <div class="card__content">
-                    <h5 class="card__content-category">{{$category->name}}</h5>
-                    <a class="card__content-title" href="{{route('blog.show',$post->slug)}}" tabindex="0">{{$post->title}}</a>
-                    <div class="card__content-info">
-                        <div class="info__time"><i class="far fa-clock"></i>
-                            <p>Clock Wed 02, 2019</p>
-                        </div>
-                        <div class="info__comment"><i class="far fa-comment"></i>
-                            <p>3</p>
-                        </div>
-                    </div>
-                    <p class="card__content-description">{{$post->description}}</p>
+<div class="category_content -grid">
+@foreach($posts as $post)
+    <div class="post-card -center"><a class="card__cover" href="{{route('blog.show',$post->slug)}}"><img src="https://avitex.vn/theme/gute/assets/images/posts/2.png" alt="Looking for some feedback for this rejected track"></a>
+        <div class="card__content">
+            <h5 class="card__content-category">{{$category->name}}</h5><a class="card__content-title" href="{{route('blog.show',$post->slug)}}">{{$post->title}}</a>
+            <div class="card__content-info">
+                <div class="info__time"><i class="far fa-clock"></i>
+                    <p>{{$category->created_at}}</p>
+                </div>
+                <div class="info__comment"><i class="far fa-comment"></i>
+                    <p>3</p>
                 </div>
             </div>
         </div>
-        @endforeach
     </div>
+    @endforeach
 </div>
 {{ $posts->links('vendor.pagination.pagination') }}
+
 @endsection

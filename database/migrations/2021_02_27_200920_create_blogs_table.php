@@ -19,6 +19,7 @@ class CreateBlogsTable extends Migration
             $table->string('slug')->unique();
             $table->longText('body');
             $table->longText('description');
+            $table->integer('views')->default(0);
             $table->boolean('status')->default('1');
             $table->softDeletes();
             $table->timestamps();

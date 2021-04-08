@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use App\Models\User;
 use App\Models\Tag;
 use App\Models\Category;
+use App\Models\PostView;
 use Log;
 
 class BlogsController extends Controller
@@ -31,8 +33,19 @@ class BlogsController extends Controller
         $next = Blog::where('id', '>', $blog->id)->orderBy('id','desc')->first();
 
         $categories=Category::inRandomOrder()->take(5)->get()->sortByDesc('created_at');
+
+        $tags=$blog->tags;
+        $trending_posts = Blog::where('created_at', '>=', now()->subdays(1))->orderBy('views', 'desc')->take(4)->get();
         
-        return view('post', compact('blog','previous','next','categories'));
+        if($blog->showPost()){// this will test if the user viwed the post or not
+            return view('post', compact('blog','previous','next','categories','tags','trending_posts'));
+        }
+        $blog->increment('views');//I have a separate column for views in the post table. This will increment the views column in the posts table.
+        
+        PostView::createViewLog($blog);
+        
+        
+        return view('post', compact('blog','previous','next','categories','tags','trending_posts'));
     }
     public function create()
     {
@@ -42,12 +55,16 @@ class BlogsController extends Controller
     public function store(Request $request)
     {
         //$input = $request->all();
+        
+        $user=User::where('email',$request->get('profile_user'))->first();
+        
         $blog = Blog::create([
             'title' => $request->get('title'),
             'body'  => $request->get('body'),
             'slug' => $request->get('slug'),
             'description' => $request->get('description'),
             'category_id' => $request->get('category'),
+            'profile_user_id'=>$user->profile->user_id
 
         ]);
         if ($blog) {

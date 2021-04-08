@@ -92,6 +92,6 @@
 @section('childpagejs')
 <script src="{{asset('plugins/custom/ckeditor/ckeditor-document.bundle.js')}}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-<script src="{{asset('js/pages/crud/forms/widgets/create_blog.js')}}"></script>
+<script src="{{asset('js/custom/create_blog.js')}}"></script>
 <script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
 @endsection

@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 Auth::routes();
-
+Route::post('/ajax/login', [App\Http\Controllers\Auth\LoginController::class, 'authenticate'])->name('ajax.login');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 Route::get('/post', [App\Http\Controllers\BlogsController::class, 'post'])->name('blog.post');
 Route::get('/post/{slug}', [App\Http\Controllers\BlogsController::class, 'show'])->name('blog.show');

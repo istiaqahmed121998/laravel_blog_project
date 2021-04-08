@@ -92,6 +92,16 @@ function clickOutSideElm(elm, callback) {
     }
   });
 }
+function gridLoad() {
+  let $categoryContent = $(".category_content");
+  let $masonryBeauty = $categoryContent.masonry({
+    itemSelector: ".post-card",
+    gutter: 20,
+  });
+  $masonryBeauty.imagesLoaded().progress(function () {
+    $masonryBeauty.masonry("layout");
+  });
+}
 //==========================================
 //==========================================
 
@@ -141,22 +151,22 @@ function clickOutSideElm(elm, callback) {
 //       $categoryContent.masonry("destroy");
 //       DUMMY_DATA.forEach((item, index) => {
 //         content += `
-        // <div class="col-12">
-        //   <div class="post-card -small -horizontal"><a class="card__cover" href="post_standard.html" tabindex="0"><img src="${item.image}" alt="${item.title}"></a>
-        //     <div class="card__content">
-        //       <h5 class="card__content-category">Technology</h5><a class="card__content-title" href="post_standard.html" tabindex="0">${item.title}</a>
-        //       <div class="card__content-info">
-        //         <div class="info__time"><i class="far fa-clock"></i>
-        //           <p>Clock  Wed 02, 2019</p>
-        //         </div>
-        //         <div class="info__comment"><i class="far fa-comment"></i>
-        //           <p>3</p>
-        //         </div>
-        //       </div>
-        //       <p class="card__content-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt labore aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
-        //     </div>
-        //   </div>
-        // </div>`;
+// <div class="col-12">
+//   <div class="post-card -small -horizontal"><a class="card__cover" href="post_standard.html" tabindex="0"><img src="${item.image}" alt="${item.title}"></a>
+//     <div class="card__content">
+//       <h5 class="card__content-category">Technology</h5><a class="card__content-title" href="post_standard.html" tabindex="0">${item.title}</a>
+//       <div class="card__content-info">
+//         <div class="info__time"><i class="far fa-clock"></i>
+//           <p>Clock  Wed 02, 2019</p>
+//         </div>
+//         <div class="info__comment"><i class="far fa-comment"></i>
+//           <p>3</p>
+//         </div>
+//       </div>
+//       <p class="card__content-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt labore aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.</p>
+//     </div>
+//   </div>
+// </div>`;
 //       });
 //       content = `<div class="row">${content}</div>`;
 //       $categoryContent
@@ -167,7 +177,7 @@ function clickOutSideElm(elm, callback) {
 //     }
 //   }
 
-  // getLayout();
+// getLayout();
 
 //   $(".category__header__filter__item").on("click", function (e) {
 //     e.preventDefault();
@@ -840,6 +850,7 @@ $(document).ready(function () {
   plyrInit();
   masonry();
   tab();
+  gridLoad();
   // categoryGenerator();
   renderStar();
   quantityController();

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -95,4 +95,18 @@ class RegisterController extends Controller
         ]));
         return $user;
     }
+    public function register(Request $request)  {   
+        $validation = $this->validator($request->all());
+        if ($validation->fails())  {  
+            return response()->json($validation->errors()->toArray());
+        }
+        else{
+            $user = $this->create($request->all());
+            Auth::login($user);
+            if (Auth::user()){
+                return response()->json(['response' => '']);
+            }
+        }
+    }
+
 }

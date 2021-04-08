@@ -28,17 +28,6 @@
                     <li class="nav-item active"><a href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="nav-item"><a>Blog</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="blog_category_grid.html">BLOG CATEGORY GRID</a></li>
-                            <li><a href="blog_category_list.html">BLOG CATEGORY LIST</a></li>
-                            <li><a href="post_standard.html">POST STANDARD</a></li>
-                            <li><a href="post_standard_image_full.html">POST STANDARD IMAGE FULLWIDTH</a></li>
-                            <li><a href="post_standard_sidebar.html">POST STANDARD SIDEBAR</a></li>
-                            <li><a href="post_gallery.html">POST GALLERY</a></li>
-                            <li><a href="post_video.html">POST VIDEO</a></li>
-                            <li><a href="post_audio.html">POST AUDIO</a></li>
-                            <li><a href="post_quote.html">POST QUOTE</a></li>
-                        </ul>
                     </li>
                     <li class="nav-item"><a href="#">Pages</a>
                         <ul class="dropdown-menu">

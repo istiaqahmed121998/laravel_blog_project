@@ -4,8 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Hash;
 class UserFactory extends Factory
 {
     /**
@@ -23,11 +22,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
+            'name' => 'Zenith Jhony',
             'email' => 'zenithzonezj@gmail.com',
-            'email_verified_at' => now(),
-            'password' => '01712274429', // password
-            'remember_token' => Str::random(10),
+            'password' => Hash::make('Zj@01712274429'),
+            'role_id'=>3,
             
         ];
     }

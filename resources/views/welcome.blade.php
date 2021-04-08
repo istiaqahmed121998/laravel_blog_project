@@ -6,8 +6,8 @@
 <div class="col-12 col-md-7 col-lg-8 order-md-1">
     <div class="row">
         <div class="col-sm-6 col-md-12">
-            @foreach($blogs ?? '' as $blog)
-            <div class="post-card -full -center"><a class="card__cover" href="{{route('blog.show', $blog->slug) }}"><img src="assets/images/posts/1.png" alt="Looking for some feedback for this rejected track" /></a>
+            @foreach($blogs ?? '' as $key =>$blog)
+            <div class="post-card -full -center"><a class="card__cover" href="{{route('blog.show', $blog->slug) }}"><img src="http://avitex.vn/theme/gute/assets/images/posts/{{$key+1}}.png" alt="Looking for some feedback for this rejected track" /></a>
                 <div class="card__content">
                     <h5 class="card__content-category">{{$blog->category->name}}</h5>
                     <a class="card__content-title" href="{{route('blog.show', $blog->slug) }}">{{$blog->title}}</a>

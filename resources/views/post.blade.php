@@ -10,7 +10,7 @@
 @stop
 @section('details')
 <div class="post-standard__banner">
-    <div class="post-standard__banner__image"><img src="{{asset('assets/images/post_detail/standard/banner.png')}}" alt="Post banner image" /></div>
+    <div class="post-standard__banner__image"><img src="https://avitex.vn/theme/gute/assets/images/post_detail/standard/banner.png" alt="Post banner image" /></div>
     <div class="post-standard__banner__content">
         <div class="post-card -center">
             <div></div>
@@ -58,14 +58,17 @@
 @stop
 @section('tags')
 <div class="post-footer__tags center">
-    <div class="tags-group"><a class="tag-btn" href="blog_category_grid.html">Gutenews</a><a class="tag-btn" href="blog_category_grid.html">Lifestyle</a><a class="tag-btn" href="blog_category_grid.html">Fashion</a><a class="tag-btn" href="blog_category_grid.html">Technology</a><a class="tag-btn" href="blog_category_grid.html">Food</a>
+    <div class="tags-group">
+        @foreach($tags as $tag)
+        <a class="tag-btn" href="{{route('tag.show',$tag->slug)}}">{{$tag->name}}</a>
+        @endforeach
     </div>
 </div>
 @stop
 @section('previous_post')
 @if($previous)
 <div class="post-footer__related__item -prev"><a href="{{route('blog.show',$previous->slug)}}"> <i class="fas fa-chevron-left"></i>Previous posts</a>
-    <div class="post-footer__related__item__content"><img src="{{asset('assets/images/posts/2.png')}}" alt="Relate news image" />
+    <div class="post-footer__related__item__content"><img src="https://avitex.vn/theme/gute/assets/images/posts/2.png" alt="Relate news image" />
         <div class="post-card ">
             <div></div>
             <div class="card__content">
@@ -86,7 +89,7 @@
             <div class="card__content">
                 <h5 class="card__content-category">{{$next->category->name}}</h5><a class="card__content-title" href="{{route('blog.show',$next->slug)}}">{{$next->title}}</a>
             </div>
-        </div><img src="{{asset('assets/images/posts/3.png')}}" alt="Relate news image" />
+        </div><img src="https://avitex.vn/theme/gute/assets/images/posts/3.png" alt="Relate news image">
     </div>
 </div>
 @endif
@@ -146,33 +149,64 @@
 @section('leavecomment')
 <h3 class="comment-title"> <span>Leave a comment</span></h3>
 <div class="post-footer__comment__form">
+    @if(Auth::user())
+
     <form action="/">
-        <div class="row">
-            <div class="col-12 col-sm-4">
-                <input type="text" placeholder="Name" name="name" />
-            </div>
-            <div class="col-12 col-sm-4">
-                <input type="email" placeholder="Email" name="email" />
-            </div>
-            <div class="col-12 col-sm-4">
-                <input type="text" placeholder="Webiste" name="website" />
-            </div>
-        </div>
         <textarea cols="30" rows="5" placeholder="Messages" name="message"></textarea>
     </form>
     <div class="center">
         <button class="btn -normal">Submit</button>
     </div>
+
+    @else
+    <div class="unauth">
+        <button class="btn -normal" id="loginbutton">Login</button>
+    </div>
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="forms">
+                <ul class="tab-group">
+                    <li class="tab active"><a href="#login">Log In</a></li>
+                    <li class="tab"><a href="#signup">Sign Up</a></li>
+                </ul>
+                <form action="javascript:void(0);" id="login">
+                    <h1>Login on w3iscool</h1>
+                    <div class="input-field">
+                        <label for="email">Email</label>
+                        <input type="email" id="loginemail" required="email" />
+                        <label for="password">Password</label>
+                        <input type="password" id="loginpassword" name="password" required />
+                        <button class="btn -normal" id="loginSubmit">Login</button>
+                        <p class="text-p"> <a href="#">Forgot password?</a> </p>
+                    </div>
+                </form>
+                <form action="#" id="signup">
+                    <h1>Sign Up on w3iscool</h1>
+                    <div class="input-field">
+                        <label for="email">Email</label>
+                        <input type="email" name="email" required="email" />
+                        <a class="btn -normal" href="#">Register</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
 </div>
+@endif
 @stop
 @section('categories')
 <div class="blog-sidebar-section -category">
     <div class="center-line-title">
         <h5>Categories</h5>
     </div>
-    @foreach($categories as $category)
+    @foreach($categories as $key=>$category)
     <a class="category -bar " href="{{route('category.showslug',$category->slug)}}">
-        <div class="category__background" style="background-image: url('{{asset('assets/images/backgrounds/category-1.png')}}')">
+        <div class="category__background" style="background-image: url(https://avitex.vn/theme/gute/assets/images/backgrounds/category-{{$key+1}}.png)">
         </div>
         <h5 class="title">{{$category->name}}</h5>
         <h5 class="quantity">{{$category->posts->count()}}</h5>
@@ -185,61 +219,20 @@
     <div class="center-line-title">
         <h5>Trending post</h5>
     </div>
+    
+    @foreach($trending_posts as $key =>$trending_post)
     <div class="trending-post">
         <div class="trending-post_image">
-            <div class="rank">1</div><img src="assets/images/backgrounds/trending-post-1.png" alt="Shifting to Vegan Diets May Cause Brain Nutrient..." />
+            <div class="rank">{{$key+1}}</div><img src="https://avitex.vn/theme/gute/assets/images/backgrounds/trending-post-{{$key+1}}.png" alt="Shifting to Vegan Diets May Cause Brain Nutrient..." />
         </div>
         <div class="trending-post_content">
-            <h5>Illustrator</h5><a href="post_standard.html">Shifting to Vegan Diets May Cause Brain Nutrient...</a>
+            <h5></h5><a href="{{route('blog.show',$trending_post->slug)}}">{{$trending_post->title}}</a>
             <div class="info__time"><i class="far fa-clock"></i>
-                <p>Seb 27, 2019</p>
+                <p>{{$trending_post->created_at}}</p>
             </div>
         </div>
     </div>
-    <div class="trending-post">
-        <div class="trending-post_image">
-            <div class="rank">2</div><img src="assets/images/backgrounds/trending-post-2.png" alt="The GQ Men Of The Year Awards 2019: Hrithik..." />
-        </div>
-        <div class="trending-post_content">
-            <h5>Design</h5><a href="post_standard.html">The GQ Men Of The Year Awards 2019: Hrithik...</a>
-            <div class="info__time"><i class="far fa-clock"></i>
-                <p>Seb 27, 2019</p>
-            </div>
-        </div>
-    </div>
-    <div class="trending-post">
-        <div class="trending-post_image">
-            <div class="rank">3</div><img src="assets/images/backgrounds/trending-post-3.png" alt="Here's How Your Diet Can Help Yo Excel in Exams" />
-        </div>
-        <div class="trending-post_content">
-            <h5>Illustrator</h5><a href="post_standard.html">Here's How Your Diet Can Help Yo Excel in Exams</a>
-            <div class="info__time"><i class="far fa-clock"></i>
-                <p>Seb 27, 2019</p>
-            </div>
-        </div>
-    </div>
-    <div class="trending-post">
-        <div class="trending-post_image">
-            <div class="rank">4</div><img src="assets/images/backgrounds/trending-post-4.png" alt="why others accept while AudioJungle..." />
-        </div>
-        <div class="trending-post_content">
-            <h5>Graphic</h5><a href="post_standard.html">why others accept while AudioJungle...</a>
-            <div class="info__time"><i class="far fa-clock"></i>
-                <p>Seb 27, 2019</p>
-            </div>
-        </div>
-    </div>
-    <div class="trending-post">
-        <div class="trending-post_image">
-            <div class="rank">5</div><img src="assets/images/backgrounds/trending-post-5.png" alt="Podcast audio episode with YouTube license question" />
-        </div>
-        <div class="trending-post_content">
-            <h5>Typography</h5><a href="post_standard.html">Podcast audio episode with YouTube license question</a>
-            <div class="info__time"><i class="far fa-clock"></i>
-                <p>Seb 27, 2019</p>
-            </div>
-        </div>
-    </div>
+    @endforeach
 </div>
 @stop
 @section('subcribe')

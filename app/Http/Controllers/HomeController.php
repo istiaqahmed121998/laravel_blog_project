@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
-        $blogs=Blog::take(5)
-        ->get()
-        ->sortByDesc('created_at');
+        $blogs=Blog::orderBy('created_at','DESC')->take(5)
+        ->get();
         $categories=Category::inRandomOrder()->take(5)->get()->sortByDesc('created_at');
         return view('welcome',compact('blogs','categories'));
     }

@@ -11,11 +11,13 @@
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.13.0/css/pro.min.css" />
     <link rel="shortcut icon" type="image/png" href="./assets/images/fav.png" />
     <!--build:css assets/css/styles.min.css-->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
     <link rel="stylesheet" href="{{asset('assets/css/elegant.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/custom_bootstrap.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/plyr.min.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/post.css')}}" />
     <!--endbuild-->
 </head>
 
@@ -231,13 +233,14 @@
     </footer>
     <!--build:js assets/js/main.min.js-->
     <script rel="script/javascript" src="{{asset('assets/js/jquery.min.js')}}"></script>
+    <script rel="script/javascript" src="{{asset('assets/js/main.js')}}"></script>
     <script rel="script/javascript" src="{{asset('assets/js/slick.min.js')}}"></script>
     <script rel="script/javascript" src="{{asset('assets/js/plyr.min.js')}}"></script>
     <script rel="script/javascript" src="{{asset('assets/js/masonry.pkgd.min.js')}}"></script>
     <script rel="script/javascript" src="{{asset('assets/js/imagesloaded.pkgd.min.js')}}"></script>
     <script rel="script/javascript" src="{{asset('assets/js/vimeo.player.min.js')}}"></script>
-    <script rel="script/javascript" src="{{asset('assets/js/main.js')}}"></script>
-    <!--endbuild-->
+    <script rel="script/javascript" src="{{asset('js/custom/post.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
 </body>
 
 </html>

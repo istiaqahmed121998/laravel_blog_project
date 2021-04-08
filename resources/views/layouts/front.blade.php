@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Blog -@yield('title')</title>
+    <title>Blog - @yield('title')</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&amp;display=swap" />
     <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.13.0/css/pro.min.css" />
     <link rel="shortcut icon" type="image/png" href="../assets/images/fav.png" />
@@ -34,34 +34,12 @@
             </div>
         </div>
         <div class="container">
-            <div class="header-wrapper"><a class="header__logo" href="index.html"><img src="./assets/images/logo.png" alt="Logo" /></a>
+            <div class="header-wrapper"><a class="header__logo" href="{{url('/')}}"><img src="../assets/images/logo.png" alt="Logo" /></a>
                 <nav>
                     <ul>
-                        <li class="nav-item"><a href="index.html">Home</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="index.html">HOMEPAGE1</a></li>
-                                <li><a href="homepage2.html">HOMEPAGE2</a></li>
-                                <li><a href="homepage3.html">HOMEPAGE3</a></li>
-                                <li><a href="homepage4.html">HOMEPAGE4</a></li>
-                                <li><a href="homepage5.html">HOMEPAGE5</a></li>
-                                <li><a href="homepage6.html">HOMEPAGE6</a></li>
-                                <li><a href="homepage7.html">HOMEPAGE7</a></li>
-                                <li><a href="homepage8.html">HOMEPAGE8</a></li>
-                                <li><a href="homepage9.html">HOMEPAGE9</a></li>
-                            </ul>
+                        <li class="nav-item"><a href="{{url('/')}}">Home</a>
                         </li>
-                        <li class="nav-item active"><a>Blog</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="blog_category_grid.html">BLOG CATEGORY GRID</a></li>
-                                <li><a href="blog_category_list.html">BLOG CATEGORY LIST</a></li>
-                                <li><a href="post_standard.html">POST STANDARD</a></li>
-                                <li><a href="post_standard_image_full.html">POST STANDARD IMAGE FULLWIDTH</a></li>
-                                <li><a href="post_standard_sidebar.html">POST STANDARD SIDEBAR</a></li>
-                                <li><a href="post_gallery.html">POST GALLERY</a></li>
-                                <li><a href="post_video.html">POST VIDEO</a></li>
-                                <li><a href="post_audio.html">POST AUDIO</a></li>
-                                <li><a href="post_quote.html">POST QUOTE</a></li>
-                            </ul>
+                        <li class="nav-item active"><a href="{{url('/')}}">Blog</a>
                         </li>
                         <li class="nav-item"><a href="#">Pages</a>
                             <ul class="dropdown-menu">
@@ -100,7 +78,7 @@
                                 </div>
                                 @foreach($categories as $category)
                                 <a class="category -bar " href="{{route('category.showslug',$category->slug)}}">
-                                    <div class="category__background" style="background-image: url('{{asset('assets/images/backgrounds/category-1.png')}}')">
+                                    <div class="category__background" style="background-image: url(https://avitex.vn/theme/gute/assets/images/backgrounds/category-1.png)">
                                     </div>
                                     <h5 class="title">{{$category->name}}</h5>
                                     <h5 class="quantity">{{$category->posts->count()}}</h5>

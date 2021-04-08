@@ -3,15 +3,14 @@
 @section('breadcrumb')
 <div class="breadcrumb">
     <ul>
-        <li><a href="index.html"> <i class="fas fa-home"></i>Home</a></li>
-        <li><a href="#">Feature</a></li>
-        <li class="active"><a href="#">Author</a></li>
+        <li><a href="{{ url('/') }}"> <i class="fas fa-home"></i>Home</a></li>
+        <li class="active"><a href="{{route('profile.show',$profile->profile_link)}}">Author</a></li>
     </ul>
 </div>
 @endsection
 @section('extra')
 <div class="author-info-block">
-    <div class="author-info-block__avatar"><img src="../assets/images/post_detail/author.png" alt="Author avatar" /></div>
+    <div class="author-info-block__avatar"><img src="{{$profile->avatar}}" alt="Author avatar" /></div>
     <div class="author-info-block__info">
         <h5>{{$profile->user->name}}</h5>
         <p>{{$profile->about_me}}</p>

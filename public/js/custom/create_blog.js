@@ -154,6 +154,7 @@ var KTcreateBlog = function () {
                     'tags': tagify1GetValue,
                     'keyword': tagify2GetValue,
                     'category': categorySelect.val(),
+                    'profile_user':document.getElementById("user_email").innerHTML,
                     '_token': $('meta[name="csrf-token"]').attr('content')
                 };
                 $.ajax({
@@ -189,20 +190,39 @@ var KTcreateBlog = function () {
     }
     var Editor = function () {
         CKEDITOR.replace('editor1', 
-        // {
-        //     customConfig : '/Users/istiaqahmed/PHPSTORM_Project/laravel_blog_project/public/js/pages/crud/forms/widgets/config.js'
-        // }
+        {
+            customConfig : 'http://127.0.0.1:8000/js/ckeditor/config.js'
+        },
         {
             filebrowserUploadUrl: "upload",
             filebrowserUploadMethod: 'form',
             disallowedContent : 'img{width,height}'
         }
         );
-       // CKEDITOR.config.customConfig='customconfig.js'
-        //         CKEDITOR.editorConfig = function( config ) {
-        //     config.language = 'fr';
-        //     config.uiColor = '#AADC6E';
-        // };
+    //    CKEDITOR.config.customConfig='config.js'
+    //             CKEDITOR.editorConfig = function( config ) {
+    //         config.language = 'fr';
+    //         config.uiColor = '#AADC6E';
+    //     };
+    CKEDITOR.config.toolbarGroups = [
+        { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+        { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker', 'editing' ] },
+        { name: 'forms', groups: [ 'forms' ] },
+        '/',
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi', 'paragraph' ] },
+        { name: 'links', groups: [ 'links' ] },
+        { name: 'insert', groups: [ 'insert' ] },
+        '/',
+        { name: 'styles', groups: [ 'styles' ] },
+        { name: 'colors', groups: [ 'colors' ] },
+        { name: 'tools', groups: [ 'tools' ] },
+        { name: 'others', groups: [ 'others' ] },
+        { name: 'about', groups: [ 'about' ] }
+    ];
+
+    CKEDITOR.config.removeButtons = 'Save,Templates,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,Subscript,Superscript,Strike,Outdent,Indent,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,Language,BidiRtl,BidiLtr,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,ShowBlocks,About';
         // CKEDITOR.config.toolbar = [
             
         

@@ -20,7 +20,7 @@ class BlogFactory extends Factory
      */
     public function definition()
     {
-        $body='<p class="paragraph">'.$this->faker->sentence($nbWords = 50, $variableNbWords = true).'</p>';
+        $body='<p>'.$this->faker->sentence($nbWords = 50, $variableNbWords = true).'</p>'.'<p>&nbsp;</p><p>'.$this->faker->sentence($nbWords = 50, $variableNbWords = true).'</p>';
         return [
             'title' => $this->faker->name,
             'slug' => $this->faker->unique()->slug,
