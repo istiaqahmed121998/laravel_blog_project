@@ -22,7 +22,7 @@
             </div>
             <!--end::Aside Top-->
             <!--begin::Aside Bottom-->
-            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url(assets/media/svg/illustrations/login-visual-1.svg)"></div>
+            <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{asset('media/svg/illustrations/login-visual-1.svg')}})"></div>
             <!--end::Aside Bottom-->
         </div>
         <!--begin::Aside-->

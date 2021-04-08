@@ -66,7 +66,7 @@ class User extends Authenticatable
             return false;
         }
     }
-    // public function hasRole($role){
-    //     dd($this->role()->name);
-    // }
+    public function hasRole($role){
+        return $this->role->name==$role;
+    }
 }

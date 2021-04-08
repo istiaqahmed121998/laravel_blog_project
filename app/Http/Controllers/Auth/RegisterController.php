@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -8,8 +8,8 @@ use App\Models\User;
 use App\Models\Profile;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -43,6 +43,21 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function incrementSlug($slug) {
+
+        $original = $slug;
+
+        $count = 2;
+
+        while (Profile::where('profile_link', '=', $slug)->exists()) {
+
+            $slug = "{$original}-" . $count++;
+        }
+
+        return $slug;
+
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -57,20 +72,6 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
-    public function incrementSlug($slug) {
-
-        $original = $slug;
-    
-        $count = 2;
-    
-        while (Profile::where('profile_link', '=', $slug)->exists()) {
-    
-            $slug = "{$original}-" . $count++;
-        }
-    
-        return $slug;
-    
-    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -80,7 +81,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user= User::create([
+        $user=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -95,18 +96,4 @@ class RegisterController extends Controller
         ]));
         return $user;
     }
-    public function register(Request $request)  {   
-        $validation = $this->validator($request->all());
-        if ($validation->fails())  {  
-            return response()->json($validation->errors()->toArray());
-        }
-        else{
-            $user = $this->create($request->all());
-            Auth::login($user);
-            if (Auth::user()){
-                return response()->json(['response' => '']);
-            }
-        }
-    }
-
 }

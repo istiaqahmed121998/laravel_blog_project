@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 @section('title', 'Login')
 @section('childcss')
-<link href="{{asset('assets/css/pages/login/login-1.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('css/pages/login/login-1.css')}}" rel="stylesheet" type="text/css" />
 @stop
 @section('login')
     <div class="login-form login-signin">

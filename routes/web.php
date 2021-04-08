@@ -16,17 +16,18 @@ use Illuminate\Support\Facades\Auth;
 
 
 Auth::routes();
-Route::post('/ajax/login', [App\Http\Controllers\Auth\LoginController::class, 'authenticate'])->name('ajax.login');
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
 Route::get('/post', [App\Http\Controllers\BlogsController::class, 'post'])->name('blog.post');
 Route::get('/post/{slug}', [App\Http\Controllers\BlogsController::class, 'show'])->name('blog.show');
 Route::get('/profile/{slug}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
 Route::get('/category/{slug}', [App\Http\Controllers\CategoryController::class, 'showslug'])->name('category.showslug');
 Route::get('/tag/{slug}', [App\Http\Controllers\TagController::class, 'show'])->name('tag.show');
+Route::get('/check', [App\Http\Controllers\Admin\AdminController::class, 'check'])->middleware('role:Author,admin');
+// Route::get('admin/edit/{id}', [App\Http\Controllers\BlogsController::class, 'edit'])->middleware('isWritter');
 // Route::get('admin/create-post', [App\Http\Controllers\BlogsController::class, 'create'])->name('blog.create')->middleware('role:admin');
 // Route::get('/admin', [App\Http\Controllers\Admin\adminController::class, 'index'])->name('dashboard')->middleware('role:admin');
 // Route::post('/store',[App\Http\Controllers\BlogsController::class, 'store'])->name('blog.store');
-Route::middleware(['auth'])->prefix('/admin')->group(function () {
+Route::middleware(['auth','role:Author,admin'])->prefix('/panel')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\adminController::class, 'index'])->name('dashboard');
     Route::get('/create-post',[App\Http\Controllers\BlogsController::class, 'create'])->name('blog.create');
     Route::post('/store',[App\Http\Controllers\BlogsController::class, 'store'])->name('blog.store');
@@ -37,11 +38,11 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('/trash', [App\Http\Controllers\BlogsController::class, 'trash'])->name('blog.trash');
     Route::delete('/trash/restore/{id}', [App\Http\Controllers\BlogsController::class, 'restore'])->name('blog.restore');
     Route::delete('/trash/permanent/{id}', [App\Http\Controllers\BlogsController::class, 'permanentDelete'])->name('blog.restore');
+});
+Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::get('/bloglist', [App\Http\Controllers\BlogsController::class, 'list'])->name('blog.list');
-    //access to admin
     Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/show/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');
-
     Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'list'])->name('category.list');
     Route::post('/category/store', [App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
     Route::patch('/category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');

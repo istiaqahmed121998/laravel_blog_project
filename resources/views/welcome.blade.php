@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-sm-6 col-md-12">
             @foreach($blogs ?? '' as $key =>$blog)
-            <div class="post-card -full -center"><a class="card__cover" href="{{route('blog.show', $blog->slug) }}"><img src="http://avitex.vn/theme/gute/assets/images/posts/{{$key+1}}.png" alt="Looking for some feedback for this rejected track" /></a>
+            <div class="post-card -full -center"><a class="card__cover" href="{{route('blog.show', $blog->slug) }}"><img src="http://avitex.vn/theme/gute/assets/images/posts/@if ($key < 4){{$key+1}}.png @endif" alt="Looking for some feedback for this rejected track" /></a>
                 <div class="card__content">
                     <h5 class="card__content-category">{{$blog->category->name}}</h5>
                     <a class="card__content-title" href="{{route('blog.show', $blog->slug) }}">{{$blog->title}}</a>
