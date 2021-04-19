@@ -1,6 +1,15 @@
 @extends('layouts.blog')
 @section('title', $blog->title)
 @section('meta')
+<meta name="description" content="{{$blog->metadescription}}">
+@php $collection = collect([]);
+@endphp
+@foreach($blog->tags->take(5) as $tag) 
+@php $collection->push($tag->name);
+@endphp
+@endforeach
+<meta name="keywords" content="{{collect($collection)->join(', ')}}">
+<meta name="author" content="{{$blog->profile->user->name}}">
 @stop
 @section('share')
 <div id="post-share">
@@ -41,7 +50,7 @@
 @stop
 @section('author')
 <div class="post-footer__author">
-    <div class="author__avatar"><img src="{{asset('assets/images/post_detail/author.png')}}" alt="Author avatar" /></div>
+    <div class="author__avatar"><img src="@if(is_null($blog->profile->avatar)) {{asset('assets/images/post_detail/author.png')}} @else {{$blog->profile->avatar}} @endif" /></div>
     <div class="author__info">
         <a href="{{route('profile.show',$blog->profile->profile_link)}}">{{$blog->profile->user->name}}</a>
         <p>{{$blog->profile->about_me}} </p>
@@ -219,7 +228,7 @@
     <div class="center-line-title">
         <h5>Trending post</h5>
     </div>
-    
+
     @foreach($trending_posts as $key =>$trending_post)
     <div class="trending-post">
         <div class="trending-post_image">

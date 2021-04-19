@@ -1,10 +1,10 @@
+// Class definition
 var KTcreateBlog = function () {
+
     var tagify1;
     var categorySelect;
-    let fv;
     var edit;
     var tagify1GetValue = [];
-    var getText;
     var convertToSlug = (Text) => {
         $('#slug').val(Text
             .toLowerCase()
@@ -41,6 +41,16 @@ var KTcreateBlog = function () {
                 tagData.value = 's✲✲t'
             }
         }
+        let tagUrl = '/panel/post/' + parseInt($.trim($('#id').text())) + '/tags';
+        $.ajax({
+            type: 'GET',
+            url: tagUrl,
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            success: function (data) {
+                tagify1.addTags(data);
+                
+            }
+        });
 
         tagify1.on('invalid', function (e) {
             console.log(e, e.detail);
@@ -54,7 +64,7 @@ var KTcreateBlog = function () {
         // basic
         categorySelect = $('#kt_select2_1, #kt_select2_1_validate');
         categorySelect.select2({
-            placeholder: 'Select a Category',
+            placeholder: 'Select a state',
         });
     }
     hljs.configure({   // optionally configure hljs
@@ -72,34 +82,30 @@ var KTcreateBlog = function () {
         categorySelect.val([]).trigger('change');
         CKEDITOR.instances.editor1.setData("");
         $('#description').val("");
-        $('#metadescription').val("");
+        $('#metadescription').val("")
         tagify1.removeAllTags();
     }
     var pageBlock = () => {
-
-
         $('#kt_blockui_page_custom_text_1').click(function (e) {
             e.preventDefault();
+            
             fv.validate().then(function (status) {
                 if (status == 'Valid') {
                     var Post = {
-                        'title': $('#title').val(),
-                        'slug': $('#slug').val(),
                         'body': CKEDITOR.instances.editor1.getData(),
                         'description': $('#description').val(),
                         'metadescription': $('#metadescription').val(),
                         'tags': tagify1GetValue,
-                        'category': categorySelect.val(),
-                        'profile_user': document.getElementById("user_email").innerHTML,
-                        '_token': $('meta[name="csrf-token"]').attr('content')
+                        'category_id': categorySelect.val(),
                     };
-                    console.log(Post);
+                    let uploadpostUrl = '/panel/update/' + parseInt($.trim($('#id').text()));
                     $.ajax({
-                        type: 'POST',
-                        url: '/panel/store',
+                        type: 'PATCH',
+                        url: uploadpostUrl,
                         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         data: Post,
                         success: function (data) {
+                            console.log(data);
                             Swal.fire({
                                 title: "Good job!",
                                 text: "You clicked the button!",
@@ -120,14 +126,15 @@ var KTcreateBlog = function () {
                     setTimeout(function () {
                         KTApp.unblockPage();
                         reset();
+                        window.location.href = '/panel/postlist';
                     }, 2000);
                 }
-                else{
+                else {
                     Swal.fire("Good job!", "You clicked the button!", "error");
                 }
             });
+            
         });
-
     }
     var validation = () => {
 
@@ -136,13 +143,24 @@ var KTcreateBlog = function () {
                 document.getElementById('blogpost'),
                 {
                     fields: {
-                        
-                        editor1:  {
+                        title: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Please enter title of this post'
+                                },
+                                stringLength: {
+                                    min: 10,
+                                    max: 70,
+                                    message: 'Please enter a menu within text length range 50 and 70'
+                                }
+                            }
+                        },
+                        editor1: {
                             validators: {
                                 callback: {
                                     message: 'Please choose 2-4 color you like most',
-                                    callback: function(input) {
-                                        
+                                    callback: function (input) {
+
                                         // Get the selected options
                                         const options = CKEDITOR.instances.editor1.document.getBody().getText();
                                         return (options !== null && options.length >= 100 && options.length <= 50000);
@@ -181,7 +199,7 @@ var KTcreateBlog = function () {
                                 }
                             }
                         },
-                        tags:{
+                        tags: {
                             validators: {
                                 notEmpty: {
                                     message: 'Please enter tag of this post'
@@ -201,38 +219,19 @@ var KTcreateBlog = function () {
     var Editor = function () {
         CKEDITOR.replace('editor1',
             // {
-            //     customConfig : 'http://127.0.0.1:8000/js/ckeditor/config.js'
-            // },
+            //     customConfig : '/Users/istiaqahmed/PHPSTORM_Project/laravel_blog_project/public/js/pages/crud/forms/widgets/config.js'
+            // }
             {
                 filebrowserUploadUrl: "upload",
                 filebrowserUploadMethod: 'form',
                 disallowedContent: 'img{width,height}'
             }
         );
-        //    CKEDITOR.config.customConfig='config.js'
-        //             CKEDITOR.editorConfig = function( config ) {
-        //         config.language = 'fr';
-        //         config.uiColor = '#AADC6E';
-        //     };
-        CKEDITOR.config.toolbarGroups = [
-            { name: 'document', groups: ['mode', 'document', 'doctools'] },
-            { name: 'clipboard', groups: ['clipboard', 'undo'] },
-            { name: 'editing', groups: ['find', 'selection', 'spellchecker', 'editing'] },
-            { name: 'forms', groups: ['forms'] },
-            '/',
-            { name: 'basicstyles', groups: ['basicstyles', 'cleanup'] },
-            { name: 'paragraph', groups: ['list', 'indent', 'blocks', 'align', 'bidi', 'paragraph'] },
-            { name: 'links', groups: ['links'] },
-            { name: 'insert', groups: ['insert'] },
-            '/',
-            { name: 'styles', groups: ['styles'] },
-            { name: 'colors', groups: ['colors'] },
-            { name: 'tools', groups: ['tools'] },
-            { name: 'others', groups: ['others'] },
-            { name: 'about', groups: ['about'] }
-        ];
-
-        CKEDITOR.config.removeButtons = 'Save,Templates,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,RemoveFormat,Subscript,Superscript,Strike,Outdent,Indent,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,Language,BidiRtl,BidiLtr,Flash,HorizontalRule,Smiley,SpecialChar,PageBreak,Iframe,ShowBlocks,About';
+        // CKEDITOR.config.customConfig='customconfig.js'
+        //         CKEDITOR.editorConfig = function( config ) {
+        //     config.language = 'fr';
+        //     config.uiColor = '#AADC6E';
+        // };
         // CKEDITOR.config.toolbar = [
 
 
@@ -254,11 +253,13 @@ var KTcreateBlog = function () {
             autoSizing();
             validation();
             pageBlock();
+
         }
     };
 
 }();
 
 jQuery(document).ready(function () {
+
     KTcreateBlog.init();
 });

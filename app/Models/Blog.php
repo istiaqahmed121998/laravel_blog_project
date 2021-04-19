@@ -14,32 +14,27 @@ class Blog extends Model
     use HasFactory;
     use SoftDeletes;
     protected $dates = ['deleted_at'];
-    protected $fillable = ['title', 'slug', 'description', 'body', 'category_id', 'profile_user_id'];
+    protected $fillable = ['title', 'slug', 'description','metadescription', 'body', 'category_id', 'profile_user_id'];
 
     public function tags()
     {
         return $this->belongsToMany('App\Models\Tag', 'blog_tags')->withTimestamps();
     }
-    public function postView()
-    {
+    public function postView(){
         return $this->hasMany(PostView::class);
     }
 
-    public function category()
-    {
+    public function category(){
         return $this->belongsTo(Category::class);
     }
-    public function profile()
-    {
+    public function profile(){
         return $this->belongsTo(Profile::class);
     }
-    public function showPost()
-    {
+    public function showPost(){
         if (auth()->id() == null) {
             return $this->postView()
                 ->where('ip', '=',  request()->ip())->exists();
         }
-
         return $this->postView()
             ->where(function ($postViewsQuery) {
                 $postViewsQuery

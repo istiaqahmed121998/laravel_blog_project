@@ -18,10 +18,12 @@ class CreateProfilesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->string('profile_link')->nullable();
             $table->text('avatar')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('city')->nullable();
             $table->date('birthday')->nullable();
             $table->string('addressline1')->nullable();
             $table->string('postcode')->nullable();
-            $table->string('county')->nullable();
+            $table->string('country')->nullable();
             $table->string('about_me')->nullable();
             $table->string('twitter')->nullable();
             $table->string('facebook')->nullable();

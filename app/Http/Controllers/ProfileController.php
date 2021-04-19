@@ -18,6 +18,7 @@ class ProfileController extends Controller
     public function index()
     {
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -37,7 +38,7 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -88,5 +89,20 @@ class ProfileController extends Controller
     public function destroy(Profile $profile)
     {
         //
+    }
+
+    public function overview($slug){
+        $profile = Profile::where('profile_link', $slug)->firstOrFail();
+        return view('both.profileoverview',compact('profile'));
+
+    }
+    public function info($slug){
+        $profile = Profile::where('profile_link', $slug)->firstOrFail();
+        return view('both.profileinformation',compact('profile'));
+
+    }
+    public function changepass($slug){
+        $profile = Profile::where('profile_link', $slug)->firstOrFail();
+        return view('both.changepassword',compact('profile'));
     }
 }

@@ -1,104 +1,112 @@
 @extends('layouts.adminpanel')
 @section('childpagecss')
 @endsection
-@section('title','Create Post')
+@section('title','List')
 @section('container')
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
-    <div class="subheader py-2 py-lg-4 subheader-solid" id="kt_subheader">
+    <div class="subheader py-2 py-lg-6 subheader-solid" id="kt_subheader">
         <div class="container-fluid d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Details-->
-            <div class="d-flex align-items-center flex-wrap mr-2">
-                <!--begin::Title-->
-                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Users</h5>
-                <!--end::Title-->
-                <!--begin::Separator-->
-                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
-                <!--end::Separator-->
-                <!--begin::Search Form-->
-                <div class="d-flex align-items-center" id="kt_subheader_search">
-                    <span class="text-dark-50 font-weight-bold" id="kt_subheader_total">450 Total</span>
-                    <form class="ml-5">
-                        <div class="input-group input-group-sm input-group-solid" style="max-width: 175px">
-                            <input type="text" class="form-control" id="kt_subheader_search_form" placeholder="Search...">
-                            <div class="input-group-append">
-                                <span class="input-group-text">
-                                    <span class="svg-icon">
-                                        <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                <rect x="0" y="0" width="24" height="24"></rect>
-                                                <path d="M14.2928932,16.7071068 C13.9023689,16.3165825 13.9023689,15.6834175 14.2928932,15.2928932 C14.6834175,14.9023689 15.3165825,14.9023689 15.7071068,15.2928932 L19.7071068,19.2928932 C20.0976311,19.6834175 20.0976311,20.3165825 19.7071068,20.7071068 C19.3165825,21.0976311 18.6834175,21.0976311 18.2928932,20.7071068 L14.2928932,16.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"></path>
-                                                <path d="M11,16 C13.7614237,16 16,13.7614237 16,11 C16,8.23857625 13.7614237,6 11,6 C8.23857625,6 6,8.23857625 6,11 C6,13.7614237 8.23857625,16 11,16 Z M11,18 C7.13400675,18 4,14.8659932 4,11 C4,7.13400675 7.13400675,4 11,4 C14.8659932,4 18,7.13400675 18,11 C18,14.8659932 14.8659932,18 11,18 Z" fill="#000000" fill-rule="nonzero"></path>
-                                            </g>
-                                        </svg>
-                                        <!--end::Svg Icon-->
-                                    </span>
-                                    <!--<i class="flaticon2-search-1 icon-sm"></i>-->
-                                </span>
-                            </div>
-                        </div>
-                    </form>
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-1">
+                <!--begin::Page Heading-->
+                <div class="d-flex align-items-baseline flex-wrap mr-5">
+                    <!--begin::Page Title-->
+                    <h5 class="text-dark font-weight-bold my-1 mr-5">HTML Table</h5>
+                    <!--end::Page Title-->
+                    <!--begin::Breadcrumb-->
+                    <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted">Crud</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted">KTDatatable</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted">Base</a>
+                        </li>
+                        <li class="breadcrumb-item text-muted">
+                            <a href="" class="text-muted">HTML Table</a>
+                        </li>
+                    </ul>
+                    <!--end::Breadcrumb-->
                 </div>
-                <!--end::Search Form-->
-                <!--begin::Group Actions-->
-                <div class="d-flex- align-items-center flex-wrap mr-2 d-none" id="kt_subheader_group_actions">
-                    <div class="text-dark-50 font-weight-bold">
-                        <span id="kt_subheader_group_selected_rows">23</span>Selected:
-                    </div>
-                    <div class="d-flex ml-6">
-                        <div class="dropdown mr-2" id="kt_subheader_group_actions_status_change">
-                            <button type="button" class="btn btn-light-primary font-weight-bolder btn-sm dropdown-toggle" data-toggle="dropdown">Update Status</button>
-                            <div class="dropdown-menu p-0 m-0 dropdown-menu-sm">
-                                <ul class="navi navi-hover pt-3 pb-4">
-                                    <li class="navi-header font-weight-bolder text-uppercase text-primary font-size-lg pb-0">Change status to:</li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link" data-toggle="status-change" data-status="1">
-                                            <span class="navi-text">
-                                                <span class="label label-light-success label-inline font-weight-bold">Approved</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link" data-toggle="status-change" data-status="2">
-                                            <span class="navi-text">
-                                                <span class="label label-light-danger label-inline font-weight-bold">Rejected</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link" data-toggle="status-change" data-status="3">
-                                            <span class="navi-text">
-                                                <span class="label label-light-warning label-inline font-weight-bold">Pending</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="navi-item">
-                                        <a href="#" class="navi-link" data-toggle="status-change" data-status="4">
-                                            <span class="navi-text">
-                                                <span class="label label-light-info label-inline font-weight-bold">On Hold</span>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <button class="btn btn-light-success font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_fetch" data-toggle="modal" data-target="#kt_datatable_records_fetch_modal">Fetch Selected</button>
-                        <button class="btn btn-light-danger font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_delete_all">Delete All</button>
-                    </div>
-                </div>
-                <!--end::Group Actions-->
+                <!--end::Page Heading-->
             </div>
-            <!--end::Details-->
+            <!--end::Info-->
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center">
-                <!--begin::Button-->
-                <a href="#" class=""></a>
-                <!--end::Button-->
-                <!--begin::Button-->
-                <a href="{{route('blog.create')}}" class="btn btn-light-primary font-weight-bold ml-2">Create Post</a>
-                <!--end::Button-->
-
+                <!--begin::Actions-->
+                <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">Actions</a>
+                <!--end::Actions-->
+                <!--begin::Dropdown-->
+                <div class="dropdown dropdown-inline" data-toggle="tooltip" title="Quick actions" data-placement="left">
+                    <a href="#" class="btn btn-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="svg-icon svg-icon-success svg-icon-2x">
+                            <!--begin::Svg Icon | path:assets/media/svg/icons/Files/File-plus.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <polygon points="0 0 24 0 24 24 0 24" />
+                                    <path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                    <path d="M11,14 L9,14 C8.44771525,14 8,13.5522847 8,13 C8,12.4477153 8.44771525,12 9,12 L11,12 L11,10 C11,9.44771525 11.4477153,9 12,9 C12.5522847,9 13,9.44771525 13,10 L13,12 L15,12 C15.5522847,12 16,12.4477153 16,13 C16,13.5522847 15.5522847,14 15,14 L13,14 L13,16 C13,16.5522847 12.5522847,17 12,17 C11.4477153,17 11,16.5522847 11,16 L11,14 Z" fill="#000000" />
+                                </g>
+                            </svg>
+                            <!--end::Svg Icon-->
+                        </span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-md dropdown-menu-right p-0 m-0">
+                        <!--begin::Navigation-->
+                        <ul class="navi navi-hover">
+                            <li class="navi-header font-weight-bold py-4">
+                                <span class="font-size-lg">Choose Label:</span>
+                                <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip" data-placement="right" title="Click to learn more..."></i>
+                            </li>
+                            <li class="navi-separator mb-3 opacity-70"></li>
+                            <li class="navi-item">
+                                <a href="#" class="navi-link">
+                                    <span class="navi-text">
+                                        <span class="label label-xl label-inline label-light-success">Customer</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="navi-item">
+                                <a href="#" class="navi-link">
+                                    <span class="navi-text">
+                                        <span class="label label-xl label-inline label-light-danger">Partner</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="navi-item">
+                                <a href="#" class="navi-link">
+                                    <span class="navi-text">
+                                        <span class="label label-xl label-inline label-light-warning">Suplier</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="navi-item">
+                                <a href="#" class="navi-link">
+                                    <span class="navi-text">
+                                        <span class="label label-xl label-inline label-light-primary">Member</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="navi-item">
+                                <a href="#" class="navi-link">
+                                    <span class="navi-text">
+                                        <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="navi-separator mt-3 opacity-70"></li>
+                            <li class="navi-footer py-4">
+                                <a class="btn btn-clean font-weight-bold btn-sm" href="#">
+                                    <i class="ki ki-plus icon-sm"></i>Add new</a>
+                            </li>
+                        </ul>
+                        <!--end::Navigation-->
+                    </div>
+                </div>
+                <!--end::Dropdown-->
             </div>
             <!--end::Toolbar-->
         </div>
@@ -108,167 +116,197 @@
     <div class="d-flex flex-column-fluid">
         <!--begin::Container-->
         <div class="container">
-        @foreach($blogs ?? '' as $blog)
             <!--begin::Card-->
-            <div class="card card-custom gutter-b">
+            <div class="card card-custom">
+                <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                    <div class="card-title">
+                        <h3 class="card-label">HTML Table
+                            <span class="d-block text-muted pt-2 font-size-sm">Datatable initialized from HTML table</span>
+                        </h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <!--begin::Dropdown-->
+                        <div class="dropdown dropdown-inline mr-2">
+                            <button type="button" class="btn btn-light-primary font-weight-bolder dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="svg-icon svg-icon-md">
+                                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/PenAndRuller.svg-->
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path d="M3,16 L5,16 C5.55228475,16 6,15.5522847 6,15 C6,14.4477153 5.55228475,14 5,14 L3,14 L3,12 L5,12 C5.55228475,12 6,11.5522847 6,11 C6,10.4477153 5.55228475,10 5,10 L3,10 L3,8 L5,8 C5.55228475,8 6,7.55228475 6,7 C6,6.44771525 5.55228475,6 5,6 L3,6 L3,4 C3,3.44771525 3.44771525,3 4,3 L10,3 C10.5522847,3 11,3.44771525 11,4 L11,19 C11,19.5522847 10.5522847,20 10,20 L4,20 C3.44771525,20 3,19.5522847 3,19 L3,16 Z" fill="#000000" opacity="0.3" />
+                                            <path d="M16,3 L19,3 C20.1045695,3 21,3.8954305 21,5 L21,15.2485298 C21,15.7329761 20.8241635,16.200956 20.5051534,16.565539 L17.8762883,19.5699562 C17.6944473,19.7777745 17.378566,19.7988332 17.1707477,19.6169922 C17.1540423,19.602375 17.1383289,19.5866616 17.1237117,19.5699562 L14.4948466,16.565539 C14.1758365,16.200956 14,15.7329761 14,15.2485298 L14,5 C14,3.8954305 14.8954305,3 16,3 Z" fill="#000000" />
+                                        </g>
+                                    </svg>
+                                    <!--end::Svg Icon-->
+                                </span>Export</button>
+                            <!--begin::Dropdown Menu-->
+                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+                                <!--begin::Navigation-->
+                                <ul class="navi flex-column navi-hover py-2">
+                                    <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">Choose an option:</li>
+                                    <li class="navi-item">
+                                        <a href="#" class="navi-link">
+                                            <span class="navi-icon">
+                                                <i class="la la-print"></i>
+                                            </span>
+                                            <span class="navi-text">Print</span>
+                                        </a>
+                                    </li>
+                                    <li class="navi-item">
+                                        <a href="#" class="navi-link">
+                                            <span class="navi-icon">
+                                                <i class="la la-copy"></i>
+                                            </span>
+                                            <span class="navi-text">Copy</span>
+                                        </a>
+                                    </li>
+                                    <li class="navi-item">
+                                        <a href="#" class="navi-link">
+                                            <span class="navi-icon">
+                                                <i class="la la-file-excel-o"></i>
+                                            </span>
+                                            <span class="navi-text">Excel</span>
+                                        </a>
+                                    </li>
+                                    <li class="navi-item">
+                                        <a href="#" class="navi-link">
+                                            <span class="navi-icon">
+                                                <i class="la la-file-text-o"></i>
+                                            </span>
+                                            <span class="navi-text">CSV</span>
+                                        </a>
+                                    </li>
+                                    <li class="navi-item">
+                                        <a href="#" class="navi-link">
+                                            <span class="navi-icon">
+                                                <i class="la la-file-pdf-o"></i>
+                                            </span>
+                                            <span class="navi-text">PDF</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!--end::Navigation-->
+                            </div>
+                            <!--end::Dropdown Menu-->
+                        </div>
+                        <!--end::Dropdown-->
+                        <!--begin::Button-->
+                        <button type="button" href="#" class="btn btn-primary font-weight-bolder" data-toggle="modal" data-target="#exampleModal">
+                            <span class="svg-icon svg-icon-md">
+                                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24" />
+                                        <circle fill="#000000" cx="9" cy="15" r="6" />
+                                        <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3" />
+                                    </g>
+                                </svg>
+                                <!--end::Svg Icon-->
+
+
+                            </span>New Record</button>
+                        <!--end::Button-->
+                        <!-- Modal-->
+                        <form class="form">
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <i aria-hidden="true" class="ki ki-close"></i>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group row">
+                                                <div class="col-lg-12">
+                                                    <label>Category</label>
+                                                    <input id="categoryname" type="text" class="form-control" placeholder="Category Name">
+                                                    <span class="form-text text-muted">Please enter your Category name</span>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-lg-12">
+                                                    <label>Category Slug</label>
+                                                    <input id="categoryslug" type="text" class="form-control" readonly>
+                                                    <span class="form-text text-muted">You don't need to write anything</span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
+                                            <button type="button" id="submit" class="btn btn-primary font-weight-bold" data-dismiss="modal">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="card-body">
-                    <!--begin::Top-->
-                    <div class="d-flex">
-                        <!--begin::Pic-->
-                        <div class="flex-shrink-0 mr-7">
-                            <div class="symbol symbol-50 symbol-lg-120">
-                                <img alt="Pic" src="assets/media//users/300_1.jpg">
+                    <!--begin: Search Form-->
+                    <!--begin::Search Form-->
+                    <div class="mb-7">
+                        <div class="row align-items-center">
+                            <div class="col-lg-9 col-xl-8">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 my-2 my-md-0">
+                                        <div class="input-icon">
+                                            <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
+                                            <span>
+                                                <i class="flaticon2-search-1 text-muted"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
+                                <a href="#" class="btn btn-light-primary px-6 font-weight-bold">Search</a>
                             </div>
                         </div>
-                        <!--end::Pic-->
-                        <!--begin: Info-->
-                        <div class="flex-grow-1">
-                            <!--begin::Title-->
-                            <div class="d-flex align-items-center justify-content-between flex-wrap mt-2">
-                                <!--begin::User-->
-                                <div class="mr-3">
-                                    <!--begin::Name-->
-                                    <a href="#" class="d-flex align-items-center text-dark text-hover-primary font-size-h5 font-weight-bold mr-3">{{$blog->title}}
-                                        <i class="flaticon2-correct text-success icon-md ml-2"></i></a>
-                                    <!--end::Name-->
-                                    <!--begin::Contacts-->
-                                    <div class="d-flex flex-wrap my-2">
-                                        <a href="#" class="text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-                                            <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
-                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Mail-notification.svg-->
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <path d="M21,12.0829584 C20.6747915,12.0283988 20.3407122,12 20,12 C16.6862915,12 14,14.6862915 14,18 C14,18.3407122 14.0283988,18.6747915 14.0829584,19 L5,19 C3.8954305,19 3,18.1045695 3,17 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,12.0829584 Z M18.1444251,7.83964668 L12,11.1481833 L5.85557487,7.83964668 C5.4908718,7.6432681 5.03602525,7.77972206 4.83964668,8.14442513 C4.6432681,8.5091282 4.77972206,8.96397475 5.14442513,9.16035332 L11.6444251,12.6603533 C11.8664074,12.7798822 12.1335926,12.7798822 12.3555749,12.6603533 L18.8555749,9.16035332 C19.2202779,8.96397475 19.3567319,8.5091282 19.1603533,8.14442513 C18.9639747,7.77972206 18.5091282,7.6432681 18.1444251,7.83964668 Z" fill="#000000"></path>
-                                                        <circle fill="#000000" opacity="0.3" cx="19.5" cy="17.5" r="2.5"></circle>
-                                                    </g>
-                                                </svg>
-                                                <!--end::Svg Icon-->
-                                            </span>jason@siastudio.com</a>
-                                        <a href="#" class="text-muted text-hover-primary font-weight-bold mr-lg-8 mr-5 mb-lg-0 mb-2">
-                                            <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
-                                                <!--begin::Svg Icon | path:assets/media/svg/icons/General/Lock.svg-->
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <mask fill="white">
-                                                            <use xlink:href="#path-1"></use>
-                                                        </mask>
-                                                        <g></g>
-                                                        <path d="M7,10 L7,8 C7,5.23857625 9.23857625,3 12,3 C14.7614237,3 17,5.23857625 17,8 L17,10 L18,10 C19.1045695,10 20,10.8954305 20,12 L20,18 C20,19.1045695 19.1045695,20 18,20 L6,20 C4.8954305,20 4,19.1045695 4,18 L4,12 C4,10.8954305 4.8954305,10 6,10 L7,10 Z M12,5 C10.3431458,5 9,6.34314575 9,8 L9,10 L15,10 L15,8 C15,6.34314575 13.6568542,5 12,5 Z" fill="#000000"></path>
-                                                    </g>
-                                                </svg>
-                                                <!--end::Svg Icon-->
-                                            </span>PR Manager</a>
-                                        <a href="#" class="text-muted text-hover-primary font-weight-bold">
-                                            <span class="svg-icon svg-icon-md svg-icon-gray-500 mr-1">
-                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Map/Marker2.svg-->
-                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                        <rect x="0" y="0" width="24" height="24"></rect>
-                                                        <path d="M9.82829464,16.6565893 C7.02541569,15.7427556 5,13.1079084 5,10 C5,6.13400675 8.13400675,3 12,3 C15.8659932,3 19,6.13400675 19,10 C19,13.1079084 16.9745843,15.7427556 14.1717054,16.6565893 L12,21 L9.82829464,16.6565893 Z M12,12 C13.1045695,12 14,11.1045695 14,10 C14,8.8954305 13.1045695,8 12,8 C10.8954305,8 10,8.8954305 10,10 C10,11.1045695 10.8954305,12 12,12 Z" fill="#000000"></path>
-                                                    </g>
-                                                </svg>
-                                                <!--end::Svg Icon-->
-                                            </span>Melbourne</a>
-                                    </div>
-                                    <!--end::Contacts-->
-                                </div>
-                                <!--begin::User-->
-                                <!--begin::Actions-->
-                                <div class="my-lg-0 my-1">
-                                    <a href="{{route('blog.edit', $blog->id) }}" class="btn btn-sm btn-light-primary font-weight-bolder text-uppercase mr-2">Edit</a>
-                                </div>
-                                <!--end::Actions-->
-                            </div>
-                            <!--end::Title-->
-                            <!--begin::Content-->
-                            <div class="d-flex align-items-center flex-wrap justify-content-between">
-                                <!--begin::Description-->
-                                <div class="flex-grow-1 font-weight-bold text-dark-50 py-2 py-lg-2 mr-5">{{$blog->description}}
-                                </div>
-                                <!--end::Description-->
-                                <!--begin::Progress-->
-                                <div class="d-flex mt-4 mt-sm-0">
-                                    <span class="font-weight-bold mr-4">Progress</span>
-                                    <div class="progress progress-xs mt-2 mb-2 flex-shrink-0 w-150px w-xl-250px">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 63%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <span class="font-weight-bolder text-dark ml-4">78%</span>
-                                </div>
-                                <!--end::Progress-->
-                            </div>
-                            <!--end::Content-->
-                        </div>
-                        <!--end::Info-->
                     </div>
-                    <!--end::Top-->
-                    <!--begin::Separator-->
-                    <div class="separator separator-solid my-7"></div>
-                    <!--end::Separator-->
-                    <!--begin::Bottom-->
-                    <div class="d-flex align-items-center flex-wrap">
-                        <!--begin: Item-->
-                        <div class="d-flex align-items-center flex-lg-fill mr-5 my-1">
-                            <span class="mr-4">
-                                <i class="flaticon-piggy-bank icon-2x text-muted font-weight-bold"></i>
-                            </span>
-                            <div class="d-flex flex-column text-dark-75">
-                                <span class="font-weight-bolder font-size-sm">View</span>
-                                <span class="font-weight-bolder font-size-h5">
-                                    <span class="text-dark-50 font-weight-bold"></span>00</span>
-                            </div>
-                        </div>
-                        <!--end: Item-->
+                    <!--end::Search Form-->
+                    <!--end: Search Form-->
+                    <!--begin: Datatable-->
+                    <table class="datatable datatable-bordered datatable-head-custom" id="kt_datatable">
+                        <thead>
+                            <tr>
+                                <th title="Field #1">Post ID</th>
+                                <th title="Field #2">Post Title</th>
+                                <th title="Field #3">Post Description</th>
+                                <th title="Field #4">Post Category</th>
+                                <th title="Field #4">Posted By</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                        
+                            @foreach ($blogs ?? '' as $blog)
+                            <tr>
+                                <td>{{$blog->id}}</td>
+                                <td>{{$blog->title}}</td>
+                                <td>{{$blog->description}}</td>
+                                <td>{{$blog->category->name}}</td>
+                                <td>{{$blog->profile->user->name}}</td>
+                                <td>
+                                    <button type="button" data-id="" class="btn btn-primary edit" data-toggle="modal" data-target="#example">
+                                        Launch demo modal
+                                    </button>
+                                </td>
+
+                            </tr>
+                            @endforeach
+
+                        </tbody>
                         
-                        <!--begin: Item-->
-                        <div class="d-flex align-items-center flex-lg-fill mr-5 my-1">
-                            <span class="mr-4">
-                                <i class="flaticon-chat-1 icon-2x text-muted font-weight-bold"></i>
-                            </span>
-                            <div class="d-flex flex-column">
-                                <span class="text-dark-75 font-weight-bolder font-size-sm">0 Comments</span>
-                                <a href="#" class="text-primary font-weight-bolder">View</a>
-                            </div>
-                        </div>
-                        <!--end: Item-->
-                        <!--begin: Item-->
-                        <div class="d-flex align-items-center flex-lg-fill my-1">
-                            <span class="mr-4">
-                                <i class="flaticon-network icon-2x text-muted font-weight-bold"></i>
-                            </span>
-                            <div class="symbol-group symbol-hover">
-                                <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Mark Stone">
-                                    <img alt="Pic" src="assets/media/users/300_25.jpg">
-                                </div>
-                                <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Charlie Stone">
-                                    <img alt="Pic" src="assets/media/users/300_19.jpg">
-                                </div>
-                                <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Luca Doncic">
-                                    <img alt="Pic" src="assets/media/users/300_22.jpg">
-                                </div>
-                                <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Nick Mana">
-                                    <img alt="Pic" src="assets/media/users/300_23.jpg">
-                                </div>
-                                <div class="symbol symbol-30 symbol-circle" data-toggle="tooltip" title="" data-original-title="Teresa Fox">
-                                    <img alt="Pic" src="assets/media/users/300_18.jpg">
-                                </div>
-                                <div class="symbol symbol-30 symbol-circle symbol-light" data-toggle="tooltip" title="" data-original-title="More users">
-                                    <span class="symbol-label font-weight-bold">5+</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end: Item-->
-                    </div>
-                    <!--end::Bottom-->
+                    </table>
+                    <!--end: Datatable-->
                 </div>
             </div>
-        @endforeach
             <!--end::Card-->
-            <!--begin::Pagination-->
-            {{ $blogs->links('vendor.pagination.custom') }}
-           
-            <!--end::Pagination-->
         </div>
         <!--end::Container-->
     </div>
@@ -276,4 +314,5 @@
 </div>
 @endsection
 @section('childpagejs')
+<script src="{{asset('js/custom/listtable.js')}}"></script>
 @endsection

@@ -3274,9 +3274,9 @@
                         <div class="col-lg-4 col-md-9 col-sm-12">
                             <textarea name="description" id="description" class="form-control" id="kt_autosize_1" rows="3">{{$blog->description}}</textarea>
                         </div>
-                        <label class="col-form-label text-left col-lg-1 col-sm-12">Keywords</label>
-                        <div class="col-lg-5 col-md-9 col-sm-12">
-                            <input id="kt_tagify_4" class="form-control" name='keywords' placeholder='Type Keywords' value='' />
+                        <label class="col-form-label text-left col-lg-2 col-sm-12">Meta Description</label>
+                        <div class="col-lg-4 col-md-9 col-sm-12">
+                            <textarea name="metadescription" id="metadescription" class="form-control" id="kt_autosize_1" rows="3">{{$blog->metadescription}}</textarea>
                         </div>
                     </div>
 
@@ -3290,8 +3290,10 @@
                         <div class=" col-lg-4 col-md-9 col-sm-8">
                             <select class="form-control select2" id="kt_select2_1" name="category">
                                 <option value=""></option>
-                                <option value="HI">Hawaii</option>
-                                <option value="CA">California</option>
+                                @foreach ($categories as $category)
+                                <option value='{{$category->id}}' {{ ($blog->category->id==$category->id) ? 'selected="selected"' : '' }}>
+                                {{$category->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
@@ -3315,6 +3317,6 @@
 @section('childpagejs')
 <script src="{{asset('plugins/custom/ckeditor/ckeditor-document.bundle.js')}}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-<script src="{{asset('js/pages/crud/forms/widgets/edit_post.js')}}"></script>
+<script src="{{asset('js/custom/edit_post.js')}}"></script>
 <script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
 @endsection

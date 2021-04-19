@@ -58,9 +58,9 @@ class User extends Authenticatable
             return false;
         }
     }
-    public function isWriter()
+    public function isWritter()
     {
-        if ($this->role_id === 3) {
+        if ($this->role_id === 2) {
             return true;
         } else {
             return false;

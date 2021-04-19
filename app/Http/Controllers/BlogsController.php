@@ -9,10 +9,10 @@ use App\Models\User;
 use App\Models\Tag;
 use App\Models\Category;
 use App\Models\PostView;
+use Illuminate\Support\Facades\Auth;
 use Log;
 
-class BlogsController extends Controller
-{
+class BlogsController extends Controller{
     public function index()
     {
         $blogs = Blog::take(20)
@@ -41,10 +41,7 @@ class BlogsController extends Controller
             return view('post', compact('blog','previous','next','categories','tags','trending_posts'));
         }
         $blog->increment('views');//I have a separate column for views in the post table. This will increment the views column in the posts table.
-        
         PostView::createViewLog($blog);
-        
-        
         return view('post', compact('blog','previous','next','categories','tags','trending_posts'));
     }
     public function create()
@@ -63,9 +60,9 @@ class BlogsController extends Controller
             'body'  => $request->get('body'),
             'slug' => $request->get('slug'),
             'description' => $request->get('description'),
+            'metadescription' => $request->get('metadescription'),
             'category_id' => $request->get('category'),
             'profile_user_id'=>$user->profile->user_id
-
         ]);
         if ($blog) {
             $tagIds = [];
@@ -114,15 +111,38 @@ class BlogsController extends Controller
     public function edit($id)
     {
         $blog = Blog::findOrFail($id);
-        //return dd($blog);
+        $categories = Category::all('id', 'name', 'slug');
 
-        return view('admin.edit_post', compact('blog'));
+        //return dd($blog);
+        
+
+        return view('admin.edit_post', compact('blog','categories'));
     }
     public function update(Request $request, $id)
     {
-        $input = $request->all();
         $blog = Blog::findOrFail($id);
-        $blog->update($input);
+        $blog->update([
+            'body'  => $request->get('body'),
+            'description' => $request->get('description'),
+            'metadescription' => $request->get('metadescription'),
+            'category_id' => $request->get('category_id'),
+        ]);
+        if ($blog) {
+            $tagIds = [];
+            foreach ($request->get('tags') as $tagName) {
+                //$post->tags()->create(['name'=>$tagName]);
+                //Or to take care of avoiding duplication of Tag
+                //you could substitute the above line as
+                $slug = Str::slug($tagName, '-');
+                $tag = Tag::firstOrCreate(['name' => $tagName, 'slug' => $slug]);
+                if ($tag) {
+                    $tagIds[] = $tag->id;
+                }
+            }
+            $blog->tags()->sync($tagIds);
+        }
+        
+        return dd($blog);
     }
     public function delete($id)
     {
@@ -146,7 +166,11 @@ class BlogsController extends Controller
     }
     public function list()
     {
-        $blogs = Blog::paginate(10);
+        $blogs = Blog::all();
         return view('admin.bloglist', compact('blogs'));
+    }
+    public function authorblog(){
+        $blogs=Blog::where('profile_user_id',Auth::user()->profile->user_id)->orderBy('views', 'DESC')->paginate(5);
+        return view('author.bloglist',compact('blogs'));
     }
 }

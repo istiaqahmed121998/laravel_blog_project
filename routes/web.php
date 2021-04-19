@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
+//for public route
 
 Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home.index');
@@ -22,14 +22,22 @@ Route::get('/post/{slug}', [App\Http\Controllers\BlogsController::class, 'show']
 Route::get('/profile/{slug}', [App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
 Route::get('/category/{slug}', [App\Http\Controllers\CategoryController::class, 'showslug'])->name('category.showslug');
 Route::get('/tag/{slug}', [App\Http\Controllers\TagController::class, 'show'])->name('tag.show');
-Route::get('/check', [App\Http\Controllers\Admin\AdminController::class, 'check'])->middleware('role:Author,admin');
-// Route::get('admin/edit/{id}', [App\Http\Controllers\BlogsController::class, 'edit'])->middleware('isWritter');
-// Route::get('admin/create-post', [App\Http\Controllers\BlogsController::class, 'create'])->name('blog.create')->middleware('role:admin');
-// Route::get('/admin', [App\Http\Controllers\Admin\adminController::class, 'index'])->name('dashboard')->middleware('role:admin');
-// Route::post('/store',[App\Http\Controllers\BlogsController::class, 'store'])->name('blog.store');
-Route::middleware(['auth','role:Author,admin'])->prefix('/panel')->group(function () {
-    Route::get('/', [App\Http\Controllers\Admin\adminController::class, 'index'])->name('dashboard');
+
+
+//login with google
+Route::get('login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('login/google/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleGoogleCallback']);
+
+//login with discord
+Route::get('login/discord', [App\Http\Controllers\Auth\LoginController::class, 'redirectToDiscord'])->name('login.discord');
+Route::get('login/discord/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleDiscordCallback']);
+
+
+//for author route
+Route::get('/panel',[App\Http\Controllers\Author\AuthorController::class, 'index'])->name('author.dashboard')->middleware('role:Author');
+Route::middleware(['auth','role:Author,Admin'])->prefix('/panel')->group(function () {
     Route::get('/create-post',[App\Http\Controllers\BlogsController::class, 'create'])->name('blog.create');
+    Route::get('/postlist',[App\Http\Controllers\BlogsController::class, 'authorblog'])->name('author.blog');
     Route::post('/store',[App\Http\Controllers\BlogsController::class, 'store'])->name('blog.store');
     Route::post('/upload', [App\Http\Controllers\BlogsController::class, 'upload'])->name('upload');
     Route::get('/edit/{id}', [App\Http\Controllers\BlogsController::class, 'edit'])->name('blog.edit');
@@ -38,8 +46,14 @@ Route::middleware(['auth','role:Author,admin'])->prefix('/panel')->group(functio
     Route::get('/trash', [App\Http\Controllers\BlogsController::class, 'trash'])->name('blog.trash');
     Route::delete('/trash/restore/{id}', [App\Http\Controllers\BlogsController::class, 'restore'])->name('blog.restore');
     Route::delete('/trash/permanent/{id}', [App\Http\Controllers\BlogsController::class, 'permanentDelete'])->name('blog.restore');
+    Route::get('/post/{id}/tags',[App\Http\Controllers\TagController::class, 'tags'])->name('blog.tags');
+    Route::get('/profile/{slug}/overview',[App\Http\Controllers\ProfileController::class, 'overview'])->name('profile.overview');
+    Route::get('/profile/{slug}/info',[App\Http\Controllers\ProfileController::class, 'info'])->name('profile.info');
+    Route::post('/profile/{slug}/info',[App\Http\Controllers\ProfileController::class, 'store'])->name('profile.infopost');
+    Route::get('/profile/{slug}/change-password',[App\Http\Controllers\ProfileController::class, 'changepass'])->name('profile.changepass');
 });
-Route::middleware(['auth'])->prefix('/admin')->group(function () {
+Route::middleware(['auth','role:Admin'])->prefix('/admin')->group(function () {
+    Route::get('/', [App\Http\Controllers\Admin\adminController::class, 'index'])->name('admin.dashboard');
     Route::get('/bloglist', [App\Http\Controllers\BlogsController::class, 'list'])->name('blog.list');
     Route::get('/category', [App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
     Route::get('/category/show/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->name('category.show');

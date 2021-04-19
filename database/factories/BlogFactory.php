@@ -26,6 +26,7 @@ class BlogFactory extends Factory
             'slug' => $this->faker->unique()->slug,
             'body' => $body,
             'description' => $this->faker->text($maxNbChars = 500),
+            'metadescription' => $this->faker->text($maxNbChars = 155),
             'category_id' => $this->faker->numberBetween($min = 1, $max = 5),
             'profile_user_id' => 1,
         ];

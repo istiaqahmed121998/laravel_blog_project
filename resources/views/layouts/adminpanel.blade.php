@@ -76,7 +76,7 @@
                     <!--begin::Menu Nav-->
                     <ul class="menu-nav">
                         <li class="menu-item {{ Request::is('admin') ? 'menu-item-active' : '' }}" aria-haspopup="true">
-                            <a href="{{route('dashboard')}}" class="menu-link">
+                            <a href="@if (Auth::user()->isAdmin()) {{route('admin.dashboard')}} @elseif(Auth::user()->isWritter()) {{route('author.dashboard')}} @endif" class="menu-link">
                                 <span class="svg-icon menu-icon">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->
                                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -95,7 +95,7 @@
                             <h4 class="menu-text">Layout</h4>
                             <i class="menu-icon ki ki-bold-more-hor icon-md"></i>
                         </li>
-                        <li class="menu-item menu-item-submenu {{ Request::is('admin/create-post') || Request::is('admin/bloglist') ? 'menu-item-open menu-item-here' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
+                        <li class="menu-item menu-item-submenu {{ Request::is('panel/create-post') || Request::is('admin/bloglist') || Request::is('admin/category') || Request::is('panel/postlist') ? 'menu-item-open menu-item-here' : '' }}" aria-haspopup="true" data-menu-toggle="hover">
                             <a href="javascript:;" class="menu-link menu-toggle">
                                 <span class="svg-icon menu-icon">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Bucket.svg-->
@@ -119,7 +119,7 @@
                                             <span class="menu-text">Blog</span>
                                         </span>
                                     </li>
-                                    <li class="menu-item {{ Request::is('admin/create-post') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                    <li class="menu-item {{ Request::is('panel/create-post') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                         <a href="{{route('blog.create')}}" class="menu-link">
                                             <i class="menu-bullet menu-bullet-dot">
                                                 <span></span>
@@ -127,6 +127,7 @@
                                             <span class="menu-text">Create Blog</span>
                                         </a>
                                     </li>
+                                    @admin
                                     <li class="menu-item {{ Request::is('admin/bloglist') ? 'menu-item-active' : '' }}" aria-haspopup="true">
                                         <a href="{{route('blog.list')}}" class="menu-link">
                                             <i class="menu-bullet menu-bullet-dot">
@@ -135,7 +136,16 @@
                                             <span class="menu-text">Blog List</span>
                                         </a>
                                     </li>
-                                    @if(Auth::user()->role->id ==1)
+                                    @endadmin
+                                    <li class="menu-item {{ Request::is('panel/postlist') ? 'menu-item-active' : '' }}" aria-haspopup="true">
+                                        <a href="{{route('author.blog')}}" class="menu-link">
+                                            <i class="menu-bullet menu-bullet-dot">
+                                                <span></span>
+                                            </i>
+                                            <span class="menu-text">Post List</span>
+                                        </a>
+                                    </li>
+                                    @admin
                                     <li class="menu-item" aria-haspopup="true">
                                         <a href="{{route('category.index')}}" class="menu-link">
                                             <i class="menu-bullet menu-bullet-dot">
@@ -144,7 +154,7 @@
                                             <span class="menu-text">Category List</span>
                                         </a>
                                     </li>
-                                    @endif
+                                    @endadmin
                                 </ul>
                             </div>
                         </li>
@@ -274,7 +284,7 @@
                                     <li class="navi-item">
                                         <a href="#" class="navi-link">
                                             <span class="symbol symbol-20 mr-3">
-                                                <img src="assets/media/svg/flags/226-united-states.svg" alt="" />
+                                                <img src="../assets/media/svg/flags/226-united-states.svg" alt="" />
                                             </span>
                                             <span class="navi-text">English</span>
                                         </a>
@@ -284,7 +294,7 @@
                                     <li class="navi-item active">
                                         <a href="#" class="navi-link">
                                             <span class="symbol symbol-20 mr-3">
-                                                <img src="assets/media/svg/flags/128-spain.svg" alt="" />
+                                                <img src="../assets/media/svg/flags/128-spain.svg" alt="" />
                                             </span>
                                             <span class="navi-text">Spanish</span>
                                         </a>
@@ -294,7 +304,7 @@
                                     <li class="navi-item">
                                         <a href="#" class="navi-link">
                                             <span class="symbol symbol-20 mr-3">
-                                                <img src="assets/media/svg/flags/162-germany.svg" alt="" />
+                                                <img src="../assets/media/svg/flags/162-germany.svg" alt="" />
                                             </span>
                                             <span class="navi-text">German</span>
                                         </a>
@@ -304,7 +314,7 @@
                                     <li class="navi-item">
                                         <a href="#" class="navi-link">
                                             <span class="symbol symbol-20 mr-3">
-                                                <img src="assets/media/svg/flags/063-japan.svg" alt="" />
+                                                <img src="../assets/media/svg/flags/063-japan.svg" alt="" />
                                             </span>
                                             <span class="navi-text">Japanese</span>
                                         </a>
@@ -314,7 +324,7 @@
                                     <li class="navi-item">
                                         <a href="#" class="navi-link">
                                             <span class="symbol symbol-20 mr-3">
-                                                <img src="assets/media/svg/flags/195-france.svg" alt="" />
+                                                <img src="../assets/media/svg/flags/195-france.svg" alt="" />
                                             </span>
                                             <span class="navi-text">French</span>
                                         </a>
@@ -438,7 +448,7 @@
         <!--begin::Header-->
         <div class="d-flex align-items-center mt-5">
             <div class="symbol symbol-100 mr-5">
-                <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
+                <div class="symbol-label" style="background-image:url(@if(is_null(auth()->user()->profile->avatar)) {{'assets/media/users/300_21.jpg'}} @else {{auth()->user()->profile->avatar}} @endif)"></div>
                 <i class="symbol-badge bg-success"></i>
             </div>
             <div class="d-flex flex-column">
@@ -478,7 +488,7 @@
         <!--begin::Nav-->
         <div class="navi navi-spacer-x-0 p-0">
             <!--begin::Item-->
-            <a href="custom/apps/user/profile-1/personal-information.html" class="navi-item">
+            <a href="{{route('profile.overview',['slug'=>auth()->user()->profile->profile_link])}}" class="navi-item">
                 <div class="navi-link">
                     <div class="symbol symbol-40 bg-light mr-3">
                         <div class="symbol-label">

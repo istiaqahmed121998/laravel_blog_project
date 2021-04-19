@@ -50,9 +50,9 @@
                         <div class="col-lg-4 col-md-9 col-sm-12">
                             <textarea name="description" id="description" class="form-control" id="kt_autosize_1" rows="3"></textarea>
                         </div>
-                        <label class="col-form-label text-left col-lg-1 col-sm-12">Keywords</label>
-                        <div class="col-lg-5 col-md-9 col-sm-12">
-                            <input id="kt_tagify_4" class="form-control" name='keywords' placeholder='Type Keywords' value='' />
+                        <label class="col-form-label text-left col-lg-2 col-sm-12">Meta Description</label>
+                        <div class="col-lg-4 col-md-9 col-sm-12">
+                            <textarea name="metadescription" id="metadescription" class="form-control" id="kt_autosize_1" rows="3"></textarea>
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@
                         <label class="col-form-label text-left col-lg-1 col-sm-12">Category</label>
                         <div class=" col-lg-4 col-md-9 col-sm-8">
                             <select class="form-control select2" id="kt_select2_1" name="category">
-                            <option value=""></option>
+                                <option value=""></option>
                                 @foreach ($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach

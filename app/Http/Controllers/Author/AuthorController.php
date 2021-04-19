@@ -15,7 +15,7 @@ class AuthorController extends Controller
     }
     
     public function index(){
-        return view('admin.dashboard');
+        return view('author.dashboard');
     }
     public function check(){
         return 'check';
