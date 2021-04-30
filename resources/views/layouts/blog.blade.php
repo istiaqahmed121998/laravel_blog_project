@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>@yield('title')</title>
     <meta charset="UTF-8" />
@@ -69,6 +70,17 @@
                         </li>
                         <li class="nav-item"><a href="about.html">About</a></li>
                         <li class="nav-item"><a href="contact.html">Contact</a></li>
+                        @auth
+                        <li class="nav-item"><a style="color: red;" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                        @endauth
                     </ul>
                 </nav>
                 <div class="header__icon-group"><a href="#" id="search"><i class="fas fa-search"></i></a>
@@ -232,6 +244,7 @@
         </div>
     </footer>
     <!--build:js assets/js/main.min.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
     <script rel="script/javascript" src="{{asset('assets/js/jquery.min.js')}}"></script>
     <script rel="script/javascript" src="{{asset('assets/js/main.js')}}"></script>
     <script rel="script/javascript" src="{{asset('assets/js/slick.min.js')}}"></script>

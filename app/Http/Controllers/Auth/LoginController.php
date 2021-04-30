@@ -1,15 +1,19 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Mail\passwordSent;
 use App\Models\User;
 use App\Models\Profile;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -42,11 +46,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function redirectToGoogle(){
+    public function redirectToGoogle()
+    {
         return Socialite::driver('google')->redirect();
     }
 
-    public function redirectToDiscord(){
+    public function redirectToDiscord()
+    {
         return Socialite::driver('discord')->redirect();
     }
 
@@ -67,7 +73,8 @@ class LoginController extends Controller
         // Return home after login
         return redirect()->route('author.dashboard');
     }
-    public function incrementSlug($slug) {
+    public function incrementSlug($slug)
+    {
 
         $original = $slug;
 
@@ -79,46 +86,60 @@ class LoginController extends Controller
         }
 
         return $slug;
+    }
 
+    public function ajaxlogin(Request $request)
+    {
+        if (!Auth::check()) {
+            $credentials = $request->only($this->username(), 'password');
+            $authSuccess = Auth::attempt($credentials, $request->has('remember'));
+
+            if ($authSuccess) {
+                $request->session()->regenerate();
+                return response()->json(['redirect' => true, 'success' => true], 200);
+            }
+            return response()->json(['success' => false], 422);
+        }
+    }
+    public function ajaxregister(Request $request)
+    {
+        if (!Auth::check()) {
+            $user = User::where('email', '=', $request->input('email'))->first();
+            if (!$user) {
+
+                $user = new User();
+                $user->name = preg_replace('/@.*?$/', '', $request->input('email'));
+                $random = str_shuffle('abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890!$%^&!$%^&');
+                $password = substr($random, 0, 10);
+                $user->email = $request->input('email');
+                $user->password = Hash::make($password);;
+                $user->role_id = 3;
+                $user->save();
+                Mail::to($request->input('email'))->send(new passwordSent($password));
+                Auth::login($user);
+                return response()->json(['redirect' => true, 'success' => true], 200);
+            }
+            elseif($user){
+                return response()->json(['success' => false,'message'=>'Already existed'], 422);
+            }
+        }
     }
 
     protected function _registerOrLoginUser($data)
     {
-        if(!Auth::check()){
+        if (!Auth::check()) {
             $user = User::where('email', '=', $data->email)->first();
             if (!$user) {
-                $user= new User();
+                $user = new User();
                 $user->name = $data->name;
                 $user->email = $data->email;
                 $user->provider_id = $data->id;
-                $user->role_id = 2;
+                $user->role_id = 3;
                 $user->save();
-                $profile_slug=Str::slug($user->name,'-');
-                if (Profile::where('profile_link', '=', $profile_slug)->exists()) {
-                    $profile_slug=$this->incrementSlug($profile_slug);
-                }
-                $profile=new Profile();
-                $profile->profile_link=$profile_slug;
-                $profile->avatar=$data->avatar;
-                $user->profile()->save($profile);
             }
-            if($user){
-                $user->provider_id = $data->id;
-                $user->save();
-                $profile=Profile::where('user_id', '=', $user->id)->first();
-                if($profile){
-                    $profile->avatar=$data->avatar;
-                    $user->profile()->save($profile);
-                }
-            }
-    
             Auth::login($user);
-        }
-        else{
+        } else {
             return dd($data);
         }
-        
-        
-        
     }
 }

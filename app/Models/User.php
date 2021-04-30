@@ -31,6 +31,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'role_id',
+        'provider_id',
+        'email_verified_at',
+        'api_token',
+        
     ];
 
     /**
@@ -68,5 +73,9 @@ class User extends Authenticatable
     }
     public function hasRole($role){
         return $this->role->name==$role;
+    }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

@@ -51,8 +51,6 @@ class BlogsController extends Controller{
     }
     public function store(Request $request)
     {
-        //$input = $request->all();
-        
         $user=User::where('email',$request->get('profile_user'))->first();
         
         $blog = Blog::create([
@@ -102,8 +100,6 @@ class BlogsController extends Controller{
             $url = asset('storage/uploads/' . $filenametostore);
             $msg = 'Image successfully uploaded';
             $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-
-            // Render HTML output
             @header('Content-type: text/html; charset=utf-8');
             echo $re;
         }
@@ -114,9 +110,12 @@ class BlogsController extends Controller{
         $categories = Category::all('id', 'name', 'slug');
 
         //return dd($blog);
-        
-
-        return view('admin.edit_post', compact('blog','categories'));
+        if(Auth::check()){
+            if($blog->profile_user_id===Auth::id() || Auth::user()->isAdmin()){
+                return view('admin.edit_post', compact('blog','categories'));
+            }
+        }
+        return redirect()->route('author.blog');
     }
     public function update(Request $request, $id)
     {
@@ -166,11 +165,11 @@ class BlogsController extends Controller{
     }
     public function list()
     {
-        $blogs = Blog::all();
+        $blogs = Blog::all()->sortByDesc('created_at');
         return view('admin.bloglist', compact('blogs'));
     }
     public function authorblog(){
-        $blogs=Blog::where('profile_user_id',Auth::user()->profile->user_id)->orderBy('views', 'DESC')->paginate(5);
+        $blogs=Blog::where('profile_user_id',Auth::user()->profile->user_id)->orderBy('created_at', 'DESC')->paginate(5);
         return view('author.bloglist',compact('blogs'));
     }
 }

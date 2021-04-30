@@ -20,6 +20,10 @@ class Blog extends Model
     {
         return $this->belongsToMany('App\Models\Tag', 'blog_tags')->withTimestamps();
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
     public function postView(){
         return $this->hasMany(PostView::class);
     }

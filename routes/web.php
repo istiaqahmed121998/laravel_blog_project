@@ -23,6 +23,9 @@ Route::get('/profile/{slug}', [App\Http\Controllers\ProfileController::class, 's
 Route::get('/category/{slug}', [App\Http\Controllers\CategoryController::class, 'showslug'])->name('category.showslug');
 Route::get('/tag/{slug}', [App\Http\Controllers\TagController::class, 'show'])->name('tag.show');
 
+//auth with ajax
+Route::post('login/ajax', [App\Http\Controllers\Auth\LoginController::class, 'ajaxlogin'])->name('login.ajax');
+Route::post('register/ajax', [App\Http\Controllers\Auth\LoginController::class, 'ajaxregister'])->name('register.ajax');
 
 //login with google
 Route::get('login/google', [App\Http\Controllers\Auth\LoginController::class, 'redirectToGoogle'])->name('login.google');
@@ -31,6 +34,10 @@ Route::get('login/google/callback', [App\Http\Controllers\Auth\LoginController::
 //login with discord
 Route::get('login/discord', [App\Http\Controllers\Auth\LoginController::class, 'redirectToDiscord'])->name('login.discord');
 Route::get('login/discord/callback', [App\Http\Controllers\Auth\LoginController::class, 'handleDiscordCallback']);
+
+//comment on a post
+Route::get('/post/{slug}/comments', [App\Http\Controllers\CommentController::class, 'show'])->name('comment.show');
+Route::post('/post/{slug}/comment', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store');
 
 
 //for author route
@@ -60,6 +67,7 @@ Route::middleware(['auth','role:Admin'])->prefix('/admin')->group(function () {
     Route::get('/category/list', [App\Http\Controllers\CategoryController::class, 'list'])->name('category.list');
     Route::post('/category/store', [App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
     Route::patch('/category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
+    Route::get('/userlist', [App\Http\Controllers\Admin\adminController::class, 'list'])->name('user.list');
     // Route::group(["prefix" => 'categories'], function () {
     //     Route::get('/', 'CategoriesController@index')->name('category.index');
     //     Route::post('/', 'CategoriesController@store')->name('category.store');

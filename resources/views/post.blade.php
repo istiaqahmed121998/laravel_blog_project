@@ -108,36 +108,6 @@
     <h3 class="comment-title"> <span>3 comment</span></h3>
     <div class="post-footer__comment__detail">
         <div class="comment__item">
-            <div class="comment__item__avatar"><img src="assets/images/post_detail/avatar/1.png" alt="Author avatar" /></div>
-            <div class="comment__item__content">
-                <div class="comment__item__content__header">
-                    <h5>Brandon Kelley</h5>
-                    <div class="data">
-                        <p><i class="far fa-clock"></i>Aug,15, 2019</p>
-                        <p><i class="far fa-heart"></i>12</p>
-                        <p><i class="far fa-share-square"></i>1</p>
-                    </div>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore aliqua. Quis ipsum suspendisse ultrices gravida lacus vel facilisis.</p>
-            </div>
-            <div class="comment__item__reply">
-                <div class="comment__item">
-                    <div class="comment__item__avatar"><img src="assets/images/post_detail/avatar/2.png" alt="Author avatar" /></div>
-                    <div class="comment__item__content">
-                        <div class="comment__item__content__header">
-                            <h5>Brandon Kelley</h5>
-                            <div class="data">
-                                <p><i class="far fa-clock"></i>Aug,15, 2019</p>
-                                <p><i class="far fa-heart"></i>12</p>
-                                <p><i class="far fa-share-square"></i>1</p>
-                            </div>
-                        </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis ipsum suspendisse ultrices gravida lacus vel facilisis, sed do eiusmod tempor.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="comment__item">
             <div class="comment__item__avatar"><img src="assets/images/post_detail/avatar/3.png" alt="Author avatar" /></div>
             <div class="comment__item__content">
                 <div class="comment__item__content__header">
@@ -161,11 +131,12 @@
     @if(Auth::user())
 
     <form action="/">
-        <textarea cols="30" rows="5" placeholder="Messages" name="message"></textarea>
-    </form>
-    <div class="center">
-        <button class="btn -normal">Submit</button>
+        <textarea cols="30" rows="5" placeholder="comment" name="comment" id="comment"></textarea>
+        <div class="center">
+        <button class="btn -normal" id="commentSubmit">Submit</button>
     </div>
+    </form>
+    
 
     @else
     <div class="unauth">
@@ -182,7 +153,7 @@
                     <li class="tab"><a href="#signup">Sign Up</a></li>
                 </ul>
                 <form action="javascript:void(0);" id="login">
-                    <h1>Login on w3iscool</h1>
+                    <h1>Login on this site</h1>
                     <div class="input-field">
                         <label for="email">Email</label>
                         <input type="email" id="loginemail" required="email" />
@@ -192,12 +163,12 @@
                         <p class="text-p"> <a href="#">Forgot password?</a> </p>
                     </div>
                 </form>
-                <form action="#" id="signup">
-                    <h1>Sign Up on w3iscool</h1>
+                <form action="javascript:void(0);" id="signup">
+                    <h1>Sign Up on this site</h1>
                     <div class="input-field">
                         <label for="email">Email</label>
-                        <input type="email" name="email" required="email" />
-                        <a class="btn -normal" href="#">Register</a>
+                        <input type="email" name="email" id="registermail" required="email" />
+                        <button class="btn -normal" id="registerSubmit">Register</button>
                     </div>
                 </form>
             </div>
