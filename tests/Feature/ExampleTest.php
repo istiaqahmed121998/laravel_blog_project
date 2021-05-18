@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\Role;
 use App\Attachment;
 use App\Models\Blog;
+use App\Models\Category;
 use App\Models\Profile;
 use Database\Seeders\ProfileSeeder;
 use Tests\TestCase;
@@ -18,7 +19,7 @@ class ExampleTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function testBasicTest1()
+    public function site_is_working()
     {
         $this->withoutExceptionHandling();
         $response = $this->get('/');
@@ -81,11 +82,11 @@ class ExampleTest extends TestCase
     /**
      * @test
      */
-    public function testDatabase()
+    public function create_user_test()
     {
         $this->withoutExceptionHandling();
-        $user = User::factory()->make();
-        
+        $user = User::factory(1)->create();
+        $this->assertEquals(User::all()->count(),1,'Match');
 
         // Use model in tests...
     }
@@ -93,14 +94,24 @@ class ExampleTest extends TestCase
      /**
      * @test
      */
-    public function role_test()
+    public function blog_post_test()
     {
         $this->withoutExceptionHandling();
         $posts = Blog::factory()
             ->count(3)
             ->for(Profile::factory())
             ->create();
+        $this->assertEquals(Blog::all()->count(),3,'Match');
         
+    }
+
+    public function test_a_welcome_view_can_be_rendered()
+    {
+        $blogs = Blog::factory(3)->create();
+        $categories=Category::factory(6)->create();
+        $view = $this->view('welcome',compact('blogs','categories'));
+
+        $view->assertSee('Homepage');
     }
     
 }
