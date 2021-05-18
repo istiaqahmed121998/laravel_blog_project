@@ -156,7 +156,7 @@ var blogPostClass = function () {
                     comment: comment,
                 },
                 success: function (data) {
-                    console.log(data)
+                    $('#comment').val("");
                     $(`<div class="comment__item">
             <div class="comment__item__avatar"><img src="../assets/images/post_detail/avatar/3.png" alt="Author avatar"></div>
             <div class="comment__item__content">

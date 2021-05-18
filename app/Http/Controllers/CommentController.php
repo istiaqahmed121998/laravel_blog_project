@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    //
+    
+    public function index(){
+        $comments=Comment::all();
+
+    }
     public function store(Request $request,$slug){
         $blog = Blog::where('slug', $slug)->firstOrFail();
         if(Auth::check()){
@@ -27,4 +31,5 @@ class CommentController extends Controller
         $blog = Blog::where('slug', $slug)->firstOrFail();
         return $blog->comments;
     }
+
 }

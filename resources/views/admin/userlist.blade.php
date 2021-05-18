@@ -3262,12 +3262,13 @@
                             </thead>
                             <tbody>
                             @foreach ($users as $user)
+                            @if($user->role->name==="Admin" || $user->role->name==="Author")
                                 <tr>
                                     <td class="pl-0 py-8">
                                         <div class="d-flex align-items-center">
                                             <div class="symbol symbol-50 symbol-light mr-4">
                                                 <span class="symbol-label">
-                                                    <img src="{{$user->profile->avatar}}" class="h-75 align-self-end" alt="">
+                                                    <img src="" class="h-75 align-self-end" alt="">
                                                 </span>
                                             </div>
                                             <div>
@@ -3277,7 +3278,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg">{{$user->profile->posts->count()}}</span>
+                                        <span class="text-dark-75 font-weight-bolder d-block font-size-lg"> @if(!is_null($user->profile->posts->count())) {{$user->profile->posts->count()}}  @endif</span>
                                         <span class="text-muted font-weight-bold">Active Post</span>
                                     </td>
                                     <td>
@@ -3296,6 +3297,7 @@
                                         <a href="#" class="btn btn-light-success font-weight-bolder font-size-sm">View</a>
                                     </td>
                                 </tr>
+                            @endif
                             @endforeach
                             </tbody>
                         </table>

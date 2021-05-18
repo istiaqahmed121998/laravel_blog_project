@@ -85,7 +85,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'role_id'=>3,
+            'role_id'=>2,
         ]);
         $profile_slug=Str::slug($user->name,'-');
         if (Profile::where('profile_link', '=', $profile_slug)->exists()) {

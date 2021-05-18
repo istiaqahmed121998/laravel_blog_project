@@ -206,43 +206,7 @@
 
                             </span>New Record</button>
                         <!--end::Button-->
-                        <!-- Modal-->
-                        <form class="form">
-                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Create Category</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <i aria-hidden="true" class="ki ki-close"></i>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div class="form-group row">
-                                                <div class="col-lg-12">
-                                                    <label>Category</label>
-                                                    <input id="categoryname" type="text" class="form-control" placeholder="Category Name">
-                                                    <span class="form-text text-muted">Please enter your Category name</span>
-                                                </div>
-
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-lg-12">
-                                                    <label>Category Slug</label>
-                                                    <input id="categoryslug" type="text" class="form-control" readonly>
-                                                    <span class="form-text text-muted">You don't need to write anything</span>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">Close</button>
-                                            <button type="button" id="submit" class="btn btn-primary font-weight-bold" data-dismiss="modal">Save changes</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+                        
                     </div>
                 </div>
                 <div class="card-body">
@@ -292,9 +256,9 @@
                                 <td>{{$blog->category->name}}</td>
                                 <td>{{$blog->profile->user->name}}</td>
                                 <td>
-                                    <button type="button" data-id="" class="btn btn-primary edit" data-toggle="modal" data-target="#example">
-                                        Launch demo modal
-                                    </button>
+                                    <a type="button" class="btn btn-primary" href="{{route('blog.edit', $blog->id) }}">
+                                        Edit Post
+                                    </a>
                                 </td>
 
                             </tr>

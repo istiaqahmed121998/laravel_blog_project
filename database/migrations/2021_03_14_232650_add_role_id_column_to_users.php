@@ -13,8 +13,14 @@ class AddRoleIdColumnToUsers extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('role_id');
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+        Schema::table('users', function (Blueprint $table) use ($driver) {
+            if ('sqlite' === $driver) {
+                $table->integer('role_id')->default(0);
+            } else {
+                $table->integer('role_id');
+            }
+            
         });
     }
 

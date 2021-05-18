@@ -68,6 +68,7 @@ Route::middleware(['auth','role:Admin'])->prefix('/admin')->group(function () {
     Route::post('/category/store', [App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
     Route::patch('/category/update/{id}', [App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
     Route::get('/userlist', [App\Http\Controllers\Admin\adminController::class, 'list'])->name('user.list');
+    Route::get('/comments', [App\Http\Controllers\CommentController::class, 'index'])->name('comments.index');
     // Route::group(["prefix" => 'categories'], function () {
     //     Route::get('/', 'CategoriesController@index')->name('category.index');
     //     Route::post('/', 'CategoriesController@store')->name('category.store');

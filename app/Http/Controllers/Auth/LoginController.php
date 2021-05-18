@@ -112,7 +112,7 @@ class LoginController extends Controller
                 $random = str_shuffle('abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890!$%^&!$%^&');
                 $password = substr($random, 0, 10);
                 $user->email = $request->input('email');
-                $user->password = Hash::make($password);;
+                $user->password = Hash::make($password);
                 $user->role_id = 3;
                 $user->save();
                 Mail::to($request->input('email'))->send(new passwordSent($password));
@@ -130,12 +130,16 @@ class LoginController extends Controller
         if (!Auth::check()) {
             $user = User::where('email', '=', $data->email)->first();
             if (!$user) {
+                $random = str_shuffle('abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890!$%^&!$%^&');
+                $password = substr($random, 0, 10);
                 $user = new User();
                 $user->name = $data->name;
                 $user->email = $data->email;
                 $user->provider_id = $data->id;
+                $user->password = Hash::make($password);
                 $user->role_id = 3;
                 $user->save();
+                Mail::to($data->email)->send(new passwordSent($password));
             }
             Auth::login($user);
         } else {

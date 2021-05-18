@@ -13,9 +13,15 @@ class AddCategoryToBlogsTable extends Migration
      */
     public function up()
     {
-        Schema::table('blogs', function (Blueprint $table) {
+        $driver = Schema::connection($this->getConnection())->getConnection()->getDriverName();
+        Schema::table('blogs', function (Blueprint $table) use ($driver) {
             //
-            $table->integer('category_id')->unsigned()->index();
+            if ('sqlite' === $driver) {
+                $table->integer('category_id')->unsigned()->index()->default(0);
+            } else {
+                $table->integer('category_id')->unsigned()->index();
+            }
+            
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }

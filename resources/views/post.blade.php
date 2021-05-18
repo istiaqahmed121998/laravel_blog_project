@@ -107,21 +107,24 @@
 <div class="post-footer__comment">
     <h3 class="comment-title"> <span>3 comment</span></h3>
     <div class="post-footer__comment__detail">
+    @foreach($comments as $comment)
         <div class="comment__item">
-            <div class="comment__item__avatar"><img src="assets/images/post_detail/avatar/3.png" alt="Author avatar" /></div>
+            <div class="comment__item__avatar"><img src="../assets/images/post_detail/avatar/3.png" alt="Author avatar" /></div>
             <div class="comment__item__content">
                 <div class="comment__item__content__header">
-                    <h5>Brandon Kelley</h5>
+                    <h5>{{$comment->user->name}}</h5>
                     <div class="data">
                         <p><i class="far fa-clock"></i>Aug,15, 2019</p>
-                        <p><i class="far fa-heart"></i>12</p>
-                        <p><i class="far fa-share-square"></i>1</p>
+                        <p><i class="far fa-heart"></i>0</p>
+                        <p><i class="far fa-share-square"></i>0</p>
                     </div>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore aliqua. Quis ipsum suspendisse ultrices gravida lacus vel facilisis.</p>
+                <p>{{$comment->comment}}</p>
             </div>
         </div>
+        @endforeach
     </div>
+    
 
 </div>
 @stop
@@ -160,6 +163,7 @@
                         <label for="password">Password</label>
                         <input type="password" id="loginpassword" name="password" required />
                         <button class="btn -normal" id="loginSubmit">Login</button>
+                        <a class="btn -normal" href="http://127.0.0.1:8000/login/google">Google</a>
                         <p class="text-p"> <a href="#">Forgot password?</a> </p>
                     </div>
                 </form>

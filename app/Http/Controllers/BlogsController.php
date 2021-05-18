@@ -8,6 +8,7 @@ use App\Models\Blog;
 use App\Models\User;
 use App\Models\Tag;
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\PostView;
 use Illuminate\Support\Facades\Auth;
 use Log;
@@ -36,13 +37,13 @@ class BlogsController extends Controller{
 
         $tags=$blog->tags;
         $trending_posts = Blog::where('created_at', '>=', now()->subdays(1))->orderBy('views', 'desc')->take(4)->get();
-        
+        $comments=$blog->comments;
         if($blog->showPost()){// this will test if the user viwed the post or not
-            return view('post', compact('blog','previous','next','categories','tags','trending_posts'));
+            return view('post', compact('blog','previous','next','categories','tags','trending_posts','comments'));
         }
         $blog->increment('views');//I have a separate column for views in the post table. This will increment the views column in the posts table.
         PostView::createViewLog($blog);
-        return view('post', compact('blog','previous','next','categories','tags','trending_posts'));
+        return view('post', compact('blog','previous','next','categories','tags','trending_posts','comments'));
     }
     public function create()
     {

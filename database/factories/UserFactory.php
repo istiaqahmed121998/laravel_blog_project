@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'name' => 'Zenith Jhony',
             'email' => 'zenithzonezj@gmail.com',
             'password' => Hash::make('Zj@01712274429'),
-            'role_id'=>3,
+            'role_id'=>1,
             
         ];
     }
